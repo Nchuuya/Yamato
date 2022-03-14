@@ -23,7 +23,7 @@ from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
 import MarinRobot.modules.sql.users_sql as sql
-from MarinRobot import (
+from Yamato import (
     BOT_NAME,
     BOT_USERNAME,
     CERT_PATH,
@@ -47,13 +47,13 @@ from MarinRobot import (
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from MarinRobot.modules import ALL_MODULES
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.alternate import typing_action
-from MarinRobot.modules.helper_funcs.chat_status import is_user_admin
-from MarinRobot.modules.helper_funcs.misc import paginate_modules
+from Yamato.modules import ALL_MODULES
+from Yamato.modules.disable import DisableAbleCommandHandler
+from Yamato.modules.helper_funcs.alternate import typing_action
+from Yamato.modules.helper_funcs.chat_status import is_user_admin
+from Yamato.modules.helper_funcs.misc import paginate_modules
 
-HELP_IMG = ""
+HELP_IMG = "https://telegra.ph/file/d5b1b51e1d25769965732.jpg"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -84,7 +84,7 @@ HELP_MSG = "Click the button below to get help manu in your pm."
 START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
-────「 [{}](https://telegra.ph/file/29a1f88c7f200d4959359.jpg) 」────
+────「 [{}]() 」────
 *ʜᴇʏ! {},*
 *ɪ ᴀᴍ 𝙈𝘼𝙍𝙄𝙉 ᴀ ᴍᴜʟᴛɪғᴜɴᴄᴛɪᴏɴᴀʟ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
@@ -93,7 +93,7 @@ PM_START_TEXT = """
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ➛ʜɪᴛ /help ᴛᴏ ᴋɴᴏᴡ ᴍʏ ᴀʙɪʟɪᴛɪᴇs. ××
 """
-
+https://telegra.ph/file/d5b1b51e1d25769965732.jpg
 GROUP_START_TEXT = """
 I'm awake already!
 Haven't slept since: {}
