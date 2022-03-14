@@ -22,7 +22,7 @@ from telegram.ext import CallbackContext, CallbackQueryHandler, Filters, Message
 from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
-import MarinRobot.modules.sql.users_sql as sql
+import Yamato.modules.sql.users_sql as sql
 from Yamato import (
     BOT_NAME,
     BOT_USERNAME,
