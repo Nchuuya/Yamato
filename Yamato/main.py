@@ -1,311 +1,910 @@
-import asyncio
-import logging
-import os
-import sys
+import html
+import importlib
 import json
-import asyncio
+import re
+import sys
 import time
-import spamwatch
-import telegram.ext as tg
+import traceback
+from sys import argv
+from typing import Optional
 
-from inspect import getfullargspec
-from aiohttp import ClientSession
-from Python_ARQ import ARQ
-from telethon import TelegramClient
-from telethon.sessions import StringSession
-from telethon.sessions import MemorySession
-from pyrogram.types import Message
-from pyrogram import Client, errors
-from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInvalid
-from pyrogram.types import Chat, User
-from ptbcontrib.postgres_persistence import PostgresPersistence
-
-StartTime = time.time()
-
-def get_user_list(__init__, key):
-    with open("{}/Senju/{}".format(os.getcwd(), __init__), "r") as json_file:
-        return json.load(json_file)[key]
-
-# enable logging
-FORMAT = "[Senju] %(message)s"
-logging.basicConfig(
-    handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
-    level=logging.INFO,
-    format=FORMAT,
-    datefmt="[%X]",
+from pyrogram import idle
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram.error import (
+    BadRequest,
+    ChatMigrated,
+    NetworkError,
+    TelegramError,
+    TimedOut,
+    Unauthorized,
 )
-logging.getLogger("pyrogram").setLevel(logging.INFO)
-logging.getLogger('ptbcontrib.postgres_persistence.postgrespersistence').setLevel(logging.WARNING)
+from telegram.ext import CallbackContext, CallbackQueryHandler, Filters, MessageHandler
+from telegram.ext.dispatcher import DispatcherHandlerStop
+from telegram.utils.helpers import escape_markdown
 
-LOGGER = logging.getLogger('[EmikoRobot]')
-LOGGER.info("Senju is starting. | An Kennedy Project Parts. | Licensed under GPLv3.")
-LOGGER.info("Not affiliated to other anime or Villain in any way whatsoever.")
-LOGGER.info("Project maintained by: github.com/kennedy-ex (t.me/excrybaby)")
+import MarinRobot.modules.sql.users_sql as sql
+from MarinRobot import (
+    BOT_NAME,
+    BOT_USERNAME,
+    CERT_PATH,
+    DONATION_LINK,
+    GROUP_START_IMG,
+    HELP_IMG,
+    LOGGER,
+    OWNER_ID,
+    PORT,
+    SUPPORT_CHAT,
+    TOKEN,
+    URL,
+    WEBHOOK,
+    StartTime,
+    dispatcher,
+    pbot,
+    telethn,
+    ubot,
+    updater,
+)
 
-# if version < 3.9, stop bot.
-if sys.version_info[0] < 3 or sys.version_info[1] < 9:
-    LOGGER.error(
-        "You MUST have a python version of at least 3.6! Multiple features depend on this. Bot quitting."
+# needed to dynamically load modules
+# NOTE: Module order is not guaranteed, specify that in the config file!
+from MarinRobot.modules import ALL_MODULES
+from MarinRobot.modules.disable import DisableAbleCommandHandler
+from MarinRobot.modules.helper_funcs.alternate import typing_action
+from MarinRobot.modules.helper_funcs.chat_status import is_user_admin
+from MarinRobot.modules.helper_funcs.misc import paginate_modules
+
+HELP_IMG = ""
+
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+
+    while count < 4:
+        count += 1
+        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
+
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+
+    return ping_time
+
+
+HELP_MSG = "Click the button below to get help manu in your pm."
+START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
+
+PM_START_TEXT = """
+────「 [{}](https://telegra.ph/file/29a1f88c7f200d4959359.jpg) 」────
+*ʜᴇʏ! {},*
+*ɪ ᴀᴍ 𝙈𝘼𝙍𝙄𝙉 ᴀ ᴍᴜʟᴛɪғᴜɴᴄᴛɪᴏɴᴀʟ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.*
+➖➖➖➖➖➖➖➖➖➖➖➖➖
+✓• *Uᴘᴛɪᴍᴇ:* `{}`
+✓• `{}` *Uꜱᴇʀ, Aᴄʀᴏꜱꜱ* `{}` *Cʜᴀᴛꜱ.*
+➖➖➖➖➖➖➖➖➖➖➖➖➖
+➛ʜɪᴛ /help ᴛᴏ ᴋɴᴏᴡ ᴍʏ ᴀʙɪʟɪᴛɪᴇs. ××
+"""
+
+GROUP_START_TEXT = """
+I'm awake already!
+Haven't slept since: {}
+"""
+
+buttons = [
+    [
+        InlineKeyboardButton(
+            text=f"Add {BOT_NAME} To Your Group",
+            url=f"t.me/{BOT_USERNAME}?startgroup=true",
+        )
+    ],
+    [
+        InlineKeyboardButton(text="ɪɴғᴏ", callback_data="marin_basichelp"),
+        InlineKeyboardButton(text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""),
+    ],
+    [
+        InlineKeyboardButton(text="Hᴇʟᴘ & Cᴏᴍᴍᴀɴᴅꜱ", callback_data="help_back"),
+    ],
+]
+
+
+HELP_STRINGS = """
+Hey there! Myself [Marin](https://telegra.ph/file/733ad56ef80d133fac966.jpg).
+I'm a Queen For Fun and help admins manage their groups ! Have a look at the following for an idea of some of the things I can help you with.
+*Main* commands available:
+ ➛ /help: PM's you this message.
+ ➛ /help <module name>: PM's you info about that module.
+ ➛ /bug <error name> : inform support about that error 
+ ➛ /donate: information on how to donate!
+ ➛ /settings: 
+   ❂ in PM: will send you your settings for all supported modules.
+   ❂ in a group: will redirect you to pm, with all that chat's settings.
+"""
+
+DONATE_STRING = """❂ I'm Free for Everyone ❂"""
+
+
+IMPORTED = {}
+MIGRATEABLE = []
+HELPABLE = {}
+STATS = []
+USER_INFO = []
+DATA_IMPORT = []
+DATA_EXPORT = []
+CHAT_SETTINGS = {}
+USER_SETTINGS = {}
+
+for module_name in ALL_MODULES:
+    imported_module = importlib.import_module("MarinRobot.modules." + module_name)
+    if not hasattr(imported_module, "__mod_name__"):
+        imported_module.__mod_name__ = imported_module.__name__
+
+    if imported_module.__mod_name__.lower() not in IMPORTED:
+        IMPORTED[imported_module.__mod_name__.lower()] = imported_module
+    else:
+        raise Exception("Can't have two modules with the same name! Please change one")
+
+    if hasattr(imported_module, "__help__") and imported_module.__help__:
+        HELPABLE[imported_module.__mod_name__.lower()] = imported_module
+
+    # Chats to migrate on chat_migrated events
+    if hasattr(imported_module, "__migrate__"):
+        MIGRATEABLE.append(imported_module)
+
+    if hasattr(imported_module, "__stats__"):
+        STATS.append(imported_module)
+
+    if hasattr(imported_module, "__user_info__"):
+        USER_INFO.append(imported_module)
+
+    if hasattr(imported_module, "__import_data__"):
+        DATA_IMPORT.append(imported_module)
+
+    if hasattr(imported_module, "__export_data__"):
+        DATA_EXPORT.append(imported_module)
+
+    if hasattr(imported_module, "__chat_settings__"):
+        CHAT_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
+
+    if hasattr(imported_module, "__user_settings__"):
+        USER_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
+
+GROUP_START_IMG ="https://telegra.ph/file/b1c5be4ec400b3710d987.mp4"
+
+
+# do not async
+def send_help(chat_id, text, keyboard=None):
+    if not keyboard:
+        keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
+    dispatcher.bot.send_message(
+        chat_id=chat_id,
+        text=text,
+        parse_mode=ParseMode.MARKDOWN,
+        disable_web_page_preview=True,
+        reply_markup=keyboard,
     )
-    sys.exit(1)
 
-ENV = bool(os.environ.get("ENV", False))
 
-if ENV:
-    TOKEN = os.environ.get("TOKEN", None)
+def test(update: Update, context: CallbackContext):
+    # pprint(eval(str(update)))
+    # update.effective_message.reply_text("Hola tester! _I_ *have* `markdown`", parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_text("This person edited a message")
+    print(update.effective_message)
 
-    try:
-        OWNER_ID = int(os.environ.get("OWNER_ID", None))
-    except ValueError:
-        raise Exception("Your OWNER_ID env variable is not a valid integer.")
 
-    JOIN_LOGGER = os.environ.get("JOIN_LOGGER", None)
-    OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
+def start(update: Update, context: CallbackContext):
+    args = context.args
+    uptime = get_readable_time((time.time() - StartTime))
+    if update.effective_chat.type == "private":
+        if len(args) >= 1:
+            if args[0].lower() == "help":
+                send_help(update.effective_chat.id, HELP_STRINGS)
+            elif args[0].lower().startswith("ghelp_"):
+                mod = args[0].lower().split("_", 1)[1]
+                if not HELPABLE.get(mod, False):
+                    return
+                send_help(
+                    update.effective_chat.id,
+                    HELPABLE[mod].__help__,
+                    InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="[♡B𝚊𝚌k♡]", callback_data="help_back"
+                                )
+                            ]
+                        ]
+                    ),
+                )
+            elif args[0].lower().startswith("stngs_"):
+                match = re.match("stngs_(.*)", args[0].lower())
+                chat = dispatcher.bot.getChat(match.group(1))
 
-    try:
-        DRAGONS = {int(x) for x in os.environ.get("DRAGONS", "").split()}
-        DEV_USERS = {int(x) for x in os.environ.get("DEV_USERS", "").split()}
-    except ValueError:
-        raise Exception("Your sudo or dev users list does not contain valid integers.")
+                if is_user_admin(chat, update.effective_user.id):
+                    send_settings(match.group(1), update.effective_user.id, False)
+                else:
+                    send_settings(match.group(1), update.effective_user.id, True)
 
-    try:
-        DEMONS = {int(x) for x in os.environ.get("DEMONS", "").split()}
-    except ValueError:
-        raise Exception("Your support users list does not contain valid integers.")
+            elif args[0][1:].isdigit() and "rules" in IMPORTED:
+                IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
-    try:
-        WOLVES = {int(x) for x in os.environ.get("WOLVES", "").split()}
-    except ValueError: 
-        raise Exception("Your whitelisted users list does not contain valid integers.")
+        else:
+            first_name = update.effective_user.first_name
+            update.effective_message.reply_text(
+                PM_START_TEXT.format(
+                    escape_markdown(context.bot.first_name),
+                    escape_markdown(first_name),
+                    escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats(),
+                ),
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,
+                timeout=60,
+            )
+    else:
+        update.effective_message.reply_animation(
+            GROUP_START_IMG,
+            caption="<code> Marin is Here For You\nI am Awake Since</code>: <code>{}</code>".format(
+                uptime
+            ),
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/NobaraSupport"
+                        )
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="ᴜᴘᴅᴀᴛᴇs",
+                            url="https://telegram.dog/MarinUpdates",
+                        )
+                    ],
+                                        [
+                        InlineKeyboardButton(
+                            text="AOGIRI UNION",
+                            url="https://telegram.dog/AogiriNetwork",
+                        )
+                    ],
+                ]
+            ),
+        )
 
-    try:
-        TIGERS = {int(x) for x in os.environ.get("TIGERS", "").split()}
-    except ValueError:
-        raise Exception("Your tiger users list does not contain valid integers.")
 
-    INFOPIC = bool(os.environ.get("INFOPIC", True))
-    BOT_USERNAME = os.environ.get("BOT_USERNAME", None)
-    EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
-    WEBHOOK = bool(os.environ.get("WEBHOOK", False))
-    URL = os.environ.get("URL", "")  # Does not contain token
-    PORT = int(os.environ.get("PORT", 5000))
-    CERT_PATH = os.environ.get("CERT_PATH")
-    API_ID = os.environ.get("API_ID", None)
-    ERROR_LOG = os.environ.get("ERROR_LOG", None)
-    API_HASH = os.environ.get("API_HASH", None)
-    SESSION_STRING = os.environ.get("SESSION_STRING", None)
-    STRING_SESSION = os.environ.get("STRING_SESSION", None)
-    DB_URL = os.environ.get("DATABASE_URL")
-    DB_URL = DB_URL.replace("postgres://", "postgresql://", 1)
-    REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
-    MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
-    ARQ_API = os.environ.get("ARQ_API", None)
-    DONATION_LINK = os.environ.get("DONATION_LINK")
-    LOAD = os.environ.get("LOAD", "").split()
-    HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
-    HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
-    TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
-    OPENWEATHERMAP_ID = os.environ.get("OPENWEATHERMAP_ID", None)
-    VIRUS_API_KEY = os.environ.get("VIRUS_API_KEY", None)
-    NO_LOAD = os.environ.get("NO_LOAD", "translation").split()
-    DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
-    STRICT_GBAN = bool(os.environ.get("STRICT_GBAN", False))
-    WORKERS = int(os.environ.get("WORKERS", 8))
-    BAN_STICKER = os.environ.get("BAN_STICKER", "CAADAgADOwADPPEcAXkko5EB3YGYAg")
-    ALLOW_EXCL = os.environ.get("ALLOW_EXCL", False)
-    CASH_API_KEY = os.environ.get("CASH_API_KEY", None)
-    TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
-    WALL_API = os.environ.get("WALL_API", None)
-    SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
-    SPAMWATCH_SUPPORT_CHAT = os.environ.get("SPAMWATCH_SUPPORT_CHAT", None)
-    SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
-    LASTFM_API_KEY = os.environ.get("LASTFM_API_KEY", None)
-    CF_API_KEY = os.environ.get("CF_API_KEY", None)
-    WELCOME_DELAY_KICK_SEC = os.environ.get("WELCOME_DELAY_KICL_SEC", None)
-    BOT_ID = int(os.environ.get("BOT_ID", None))
-    ARQ_API_URL = "https://thearq.tech/"
-    ARQ_API_KEY = "BCYKVF-KYQWFM-JCMORU-RZWOFQ-ARQ"
+def error_handler(update, context):
+    """Log the error and send a telegram message to notify the developer."""
+    # Log the error before we do anything else, so we can see it even if something breaks.
+    LOGGER.error(msg="Exception while handling an update:", exc_info=context.error)
 
-    ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
+    # traceback.format_exception returns the usual python message about an exception, but as a
+    # list of strings rather than a single string, so we have to join them together.
+    tb_list = traceback.format_exception(
+        None, context.error, context.error.__traceback__
+    )
+    tb = "".join(tb_list)
 
-    try:
-        BL_CHATS = {int(x) for x in os.environ.get("BL_CHATS", "").split()}
-    except ValueError:
-        raise Exception("Your blacklisted chats list does not contain valid integers.")
+    # Build the message with some markup and additional information about what happened.
+    message = (
+        "An exception was raised while handling an update\n"
+        "<pre>update = {}</pre>\n\n"
+        "<pre>{}</pre>"
+    ).format(
+        html.escape(json.dumps(update.to_dict(), indent=2, ensure_ascii=False)),
+        html.escape(tb),
+    )
 
-else:
-    from EmikoRobot.config import Development as Config
+    if len(message) >= 4096:
+        message = message[:4096]
+    # Finally, send the message
+    context.bot.send_message(chat_id=OWNER_ID, text=message, parse_mode=ParseMode.HTML)
 
-    TOKEN = Config.TOKEN
 
-    try:
-        OWNER_ID = int(Config.OWNER_ID)
-    except ValueError:
-        raise Exception("Your OWNER_ID variable is not a valid integer.")
-
-    JOIN_LOGGER = Config.JOIN_LOGGER
-    OWNER_USERNAME = Config.OWNER_USERNAME
-    ALLOW_CHATS = Config.ALLOW_CHATS
-    try:
-        DRAGONS = {int(x) for x in Config.DRAGONS or []}
-        DEV_USERS = {int(x) for x in Config.DEV_USERS or []}
-    except ValueError:
-        raise Exception("Your sudo or dev users list does not contain valid integers.")
-
-    try:
-        DEMONS = {int(x) for x in Config.DEMONS or []}
-    except ValueError:
-        raise Exception("Your support users list does not contain valid integers.")
-
-    try:
-        WOLVES = {int(x) for x in Config.WOLVES or []}
-    except ValueError:
-        raise Exception("Your whitelisted users list does not contain valid integers.")
-
-    try:
-        TIGERS = {int(x) for x in Config.TIGERS or []}
-    except ValueError:
-        raise Exception("Your tiger users list does not contain valid integers.")
-
-    EVENT_LOGS = Config.EVENT_LOGS
-    WEBHOOK = Config.WEBHOOK
-    URL = Config.URL
-    PORT = Config.PORT
-    CERT_PATH = Config.CERT_PATH
-    API_ID = Config.API_ID
-    API_HASH = Config.API_HASH
-
-    DB_URL = Config._DATABASE_URL
-    MONGO_DB_URI = Config.MONGO_DB_URI
-    ARQ_API = Config.ARQ_API_KEY
-    ARQ_API_URL = Config.ARQ_API_URL
-    DONATION_LINK = Config.DONATION_LINK
-    LOAD = Config.LOAD
-    TEMP_DOWNLOAD_DIRECTORY = Config.TEMP_DOWNLOAD_DIRECTORY
-    OPENWEATHERMAP_ID = Config.OPENWEATHERMAP_ID
-    NO_LOAD = Config.NO_LOAD
-    ERROR_LOG = Config.ERROR_LOG
-    HEROKU_API_KEY = Config.HEROKU_API_KEY
-    HEROKU_APP_NAME = Config.HEROKU_APP_NAME
-    DEL_CMDS = Config.DEL_CMDS
-    STRICT_GBAN = Config.STRICT_GBAN
-    WORKERS = Config.WORKERS
-    REM_BG_API_KEY = Config.REM_BG_API_KEY
-    BAN_STICKER = Config.BAN_STICKER
-    ALLOW_EXCL = Config.ALLOW_EXCL
-    CASH_API_KEY = Config.CASH_API_KEY
-    TIME_API_KEY = Config.TIME_API_KEY
-    WALL_API = Config.WALL_API
-    SUPPORT_CHAT = Config.SUPPORT_CHAT
-    SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
-    SPAMWATCH_API = Config.SPAMWATCH_API
-    SESSION_STRING = Config.SESSION_STRING
-    INFOPIC = Config.INFOPIC
-    BOT_USERNAME = Config.BOT_USERNAME
-    STRING_SESSION = Config.STRING_SESSION
-    LASTFM_API_KEY = Config.LASTFM_API_KEY
-    CF_API_KEY = Config.CF_API_KEY
+# for test purposes
+def error_callback(update, context):
+    """#TODO
+    Params:
+        update  -
+        context -
+    """
 
     try:
-        BL_CHATS = {int(x) for x in Config.BL_CHATS or []}
-    except ValueError:
-        raise Exception("Your blacklisted chats list does not contain valid integers.")
+        raise context.error
+    except (Unauthorized, BadRequest):
+        pass
+        # remove update.message.chat_id from conversation list
+    except TimedOut:
+        pass
+        # handle slow connection problems
+    except NetworkError:
+        pass
+        # handle other connection problems
+    except ChatMigrated:
+        pass
+        # the chat_id of a group has changed, use e.new_chat_id instead
+    except TelegramError:
+        pass
+        # handle all other telegram related errors
 
-# If you forking dont remove this id, just add your id. LOL...
 
-DRAGONS.add(OWNER_ID)
-DRAGONS.add(2088106582)
-DEV_USERS.add(OWNER_ID)
-DEV_USERS.add(1138045685)
-DEV_USERS.add(2088106582)
+def help_button(update, context):
+    query = update.callback_query
+    mod_match = re.match(r"help_module\((.+?)\)", query.data)
+    prev_match = re.match(r"help_prev\((.+?)\)", query.data)
+    next_match = re.match(r"help_next\((.+?)\)", query.data)
+    back_match = re.match(r"help_back", query.data)
 
-if not SPAMWATCH_API:
-    sw = None
-    LOGGER.warning("SpamWatch API key missing! recheck your config")
-else:
+    print(query.message.chat.id)
+
     try:
-        sw = spamwatch.Client(SPAMWATCH_API)
-    except:
-        sw = None
-        LOGGER.warning("Can't connect to SpamWatch!")
+        if mod_match:
+            module = mod_match.group(1)
+            text = (
+                "╒═══≼ ᴍᴇɴᴜ ᴏғ「 *{}* 」ᴍᴏᴅᴜʟᴇ: \n".format(HELPABLE[module].__mod_name__)
+                + HELPABLE[module].__help__
+            )
+            query.message.edit_text(
+                text=text,
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="【♡Bᴀᴄᴋ♡】", callback_data="help_back"
+                            ),
+                            InlineKeyboardButton(
+                                text="【♡Hᴏᴍᴇ♡】", callback_data="marin_back"
+                            ),
+                        ]
+                    ]
+                ),
+            )
 
-from EmikoRobot.modules.sql import SESSION
+        elif prev_match:
+            curr_page = int(prev_match.group(1))
+            query.message.edit_text(
+                text=HELP_STRINGS,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(curr_page - 1, HELPABLE, "help")
+                ),
+            )
 
-defaults = tg.Defaults(run_async=True)
-updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
-telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
-dispatcher = updater.dispatcher
-print("[INFO]: INITIALIZING AIOHTTP SESSION")
-aiohttpsession = ClientSession()
-# ARQ Client
-print("[INFO]: INITIALIZING ARQ CLIENT")
-arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+        elif next_match:
+            next_page = int(next_match.group(1))
+            query.message.edit_text(
+                text=HELP_STRINGS,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(next_page + 1, HELPABLE, "help")
+                ),
+            )
 
-ubot2 = TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH)
+        elif back_match:
+            query.message.edit_text(
+                text=HELP_STRINGS,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(0, HELPABLE, "help")
+                ),
+            )
+
+        # ensure no spinny white circle
+        context.bot.answer_callback_query(query.id)
+        # query.message.delete()
+
+    except BadRequest:
+        pass
+GROUP_START_IMG = "https://telegra.ph/file/e36d740c802879c68dda6.mp4"
+
+def marin_callback_data(update, context):
+    query = update.callback_query
+    uptime = get_readable_time((time.time() - StartTime))
+    if query.data == "marin_":
+        query.message.edit_text(
+            text="""
+        ❍[Owner](https://t.me/Xtheanonymous)💜
+        ❍[Updates](https://t.me/NobaraSupport)🧡
+        ❍[Suppσrt](https://t.me/NobaraSupport)🤍
+        ❍[Suppσrt](https://t.me/NobaraSupport)💚
+        ❍ [ChatGrp](https://t.me/AnimeChatAura)❤️
+        ✨[Vc Player Help](https://telegra.ph/file/bc78aaf26976f892d6478.jpg)✨""",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="♡Bᴀᴄᴋ♡", callback_data="marin_back")]]
+            ),
+        )
+    elif query.data == "marin_basichelp":
+        query.message.edit_text(
+            text=f"*Here's basic Help regarding* *How to use Me?*"
+            f"\n\n• Firstly Add {dispatcher.bot.first_name} to your group by pressing [here](http://t.me/{dispatcher.bot.username}?startgroup=true)\n"
+            f"\n• After adding promote me manually with full rights for faster experience.\n"
+            f"\n• Than send `/admincache@MarinRobot` in that chat to refresh admin list in My database.\n"
+            f"\n\n*All done now use below given button's to know about use!*\n"
+            f"",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="ᴀᴅᴍɪɴ", callback_data="marin_admin"),
+                        InlineKeyboardButton(text="ɴᴏᴛᴇs", callback_data="marin_notes"),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", callback_data="NobaraSupport"
+                        ),
+                        InlineKeyboardButton(
+                            text="ᴄʀᴇᴅɪᴛ", callback_data="marin_credits"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="♡Bᴀᴄᴋ♡", callback_data="marin_back"
+                        ),
+                    ],
+                ]
+            ),
+        )
+    elif query.data == "marin_admin":
+        query.message.edit_text(
+            text=f"*Let's make your group bit effective now*"
+            f"\nCongragulations, Miss Marin now ready to manage your group."
+            f"\n\n*Admin Tools*"
+            f"\nBasic Admin tools help you to protect and powerup your group."
+            f"\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
+            f"\n\n*Welcome*"
+            f"\nLets set a welcome message to welcome new users coming to your group."
+            f"send `/setwelcome [message]` to set a welcome message!",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                        )
+                    ]
+                ]
+            ),
+        )
+
+    elif query.data == "marin_notes":
+        query.message.edit_text(
+            text=f"<b> Setting up notes</b>"
+            f"\nYou can save message/media/audio or anything as notes"
+            f"\nto get a note simply use # at the beginning of a word"
+            f"\n\nYou can also set buttons for notes and filters (refer help menu)",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                        )
+                    ]
+                ]
+            ),
+        )
+    elif query.data == "Nobarasupport":
+        query.message.edit_text(
+            text="* Marin support chats*" "\nJoin Support Group/Channel",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", url="t.me/NobaraSupport"),
+                        InlineKeyboardButton(
+                            text="ᴠᴄ ʜᴇʟᴘ", url="https://telegra.ph/file/bc78aaf26976f892d6478.jpg"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/NobaraSupport"
+                        ),
+                        InlineKeyboardButton(
+                            text="ᴜᴘᴅᴀᴛᴇs", url="https://t.me/NobaraSupport"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                        ),
+                    ],
+                ]
+            ),
+        )
+    elif query.data == "marin_credits":
+        query.message.edit_text(
+            text=f"<b>Marin Riders</b>\n"
+            f"\nHere Some Developers Helping in Making The Marin",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url="t.me/Xtheanonymous"),
+                        InlineKeyboardButton(
+                            text="ɢɪᴛʜᴜʙ", url="https://github.com/Unknown-san"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="ᴅᴇᴠ", url="https://t.me/Xtheanonymous"
+                        ),
+                        InlineKeyboardButton(
+                            text="ꜱᴜᴅᴏ", url="https://t.me/NobaraSupport"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                        ),
+                    ],
+                ]
+            ),
+        )
+    elif query.data == "marin_back":
+        first_name = update.effective_user.first_name
+        query.message.edit_text(
+            PM_START_TEXT.format(
+                escape_markdown(context.bot.first_name),
+                escape_markdown(first_name),
+                escape_markdown(uptime),
+                sql.num_users(),
+                sql.num_chats(),
+            ),
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            timeout=60,
+            disable_web_page_preview=False,
+        )
+
+
+@typing_action
+def get_help(update, context):
+    chat = update.effective_chat  # type: Optional[Chat]
+    args = update.effective_message.text.split(None, 1)
+
+    # ONLY send help in PM
+    if chat.type != chat.PRIVATE:
+
+        update.effective_message.reply_photo(
+            HELP_IMG,
+            HELP_MSG,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="Open In Private Chat",
+                            url="t.me/{}?start=help".format(context.bot.username),
+                        )
+                    ]
+                ]
+            ),
+        )
+        return
+
+    if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
+        module = args[1].lower()
+        text = (
+            " 〔 *{}* 〕\n".format(HELPABLE[module].__mod_name__)
+            + HELPABLE[module].__help__
+        )
+        send_help(
+            chat.id,
+            text,
+            InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="[♡Bᴀᴄᴋ♡]", callback_data="help_back")]]
+            ),
+        )
+
+    else:
+        send_help(chat.id, HELP_STRINGS)
+
+
+def send_settings(chat_id, user_id, user=False):
+    if user:
+        if USER_SETTINGS:
+            settings = "\n\n".join(
+                "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id))
+                for mod in USER_SETTINGS.values()
+            )
+            dispatcher.bot.send_message(
+                user_id,
+                "These are your current settings:" + "\n\n" + settings,
+                parse_mode=ParseMode.MARKDOWN,
+            )
+
+        else:
+            dispatcher.bot.send_message(
+                user_id,
+                "Seems like there aren't any user specific settings available :'(",
+                parse_mode=ParseMode.MARKDOWN,
+            )
+
+    elif CHAT_SETTINGS:
+        chat_name = dispatcher.bot.getChat(chat_id).title
+        dispatcher.bot.send_message(
+            user_id,
+            text="Which module would you like to check {}'s settings for?".format(
+                chat_name
+            ),
+            reply_markup=InlineKeyboardMarkup(
+                paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
+            ),
+        )
+    else:
+        dispatcher.bot.send_message(
+            user_id,
+            "Seems like there aren't any chat settings available :'(\nSend this "
+            "in a group chat you're admin in to find its current settings!",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+
+
+def settings_button(update: Update, context: CallbackContext):
+    query = update.callback_query
+    user = update.effective_user
+    bot = context.bot
+    mod_match = re.match(r"stngs_module\((.+?),(.+?)\)", query.data)
+    prev_match = re.match(r"stngs_prev\((.+?),(.+?)\)", query.data)
+    next_match = re.match(r"stngs_next\((.+?),(.+?)\)", query.data)
+    back_match = re.match(r"stngs_back\((.+?)\)", query.data)
+    try:
+        if mod_match:
+            chat_id = mod_match.group(1)
+            module = mod_match.group(2)
+            chat = bot.get_chat(chat_id)
+            text = "*{}* has the following settings for the *{}* module:\n\n".format(
+                escape_markdown(chat.title), CHAT_SETTINGS[module].__mod_name__
+            ) + CHAT_SETTINGS[module].__chat_settings__(chat_id, user.id)
+            query.message.reply_text(
+                text=text,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="♡Bᴀᴄᴋ♡",
+                                callback_data="stngs_back({})".format(chat_id),
+                            )
+                        ]
+                    ]
+                ),
+            )
+
+        elif prev_match:
+            chat_id = prev_match.group(1)
+            curr_page = int(prev_match.group(2))
+            chat = bot.get_chat(chat_id)
+            query.message.reply_text(
+                "Hi there! There are quite a few settings for {} - go ahead and pick what "
+                "you're interested in.".format(chat.title),
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(
+                        curr_page - 1, CHAT_SETTINGS, "stngs", chat=chat_id
+                    )
+                ),
+            )
+
+        elif next_match:
+            chat_id = next_match.group(1)
+            next_page = int(next_match.group(2))
+            chat = bot.get_chat(chat_id)
+            query.message.reply_text(
+                "Hi there! There are quite a few settings for {} - go ahead and pick what "
+                "you're interested in.".format(chat.title),
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(
+                        next_page + 1, CHAT_SETTINGS, "stngs", chat=chat_id
+                    )
+                ),
+            )
+
+        elif back_match:
+            chat_id = back_match.group(1)
+            chat = bot.get_chat(chat_id)
+            query.message.reply_text(
+                text="Hi there! There are quite a few settings for {} - go ahead and pick what "
+                "you're interested in.".format(escape_markdown(chat.title)),
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
+                ),
+            )
+
+        # ensure no spinny white circle
+        bot.answer_callback_query(query.id)
+        query.message.delete()
+    except BadRequest as excp:
+        if excp.message not in [
+            "Message is not modified",
+            "Query_id_invalid",
+            "Message can't be deleted",
+        ]:
+            LOGGER.exception("Exception in settings buttons. %s", str(query.data))
+
+
+def get_settings(update: Update, context: CallbackContext):
+    chat = update.effective_chat  # type: Optional[Chat]
+    user = update.effective_user  # type: Optional[User]
+    msg = update.effective_message  # type: Optional[Message]
+
+    # ONLY send settings in PM
+    if chat.type == chat.PRIVATE:
+        send_settings(chat.id, user.id, True)
+
+    elif is_user_admin(chat, user.id):
+        text = "Click here to get this chat's settings, as well as yours."
+        msg.reply_text(
+            text,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="Settings",
+                            url="t.me/{}?start=stngs_{}".format(
+                                context.bot.username, chat.id
+                            ),
+                        )
+                    ]
+                ]
+            ),
+        )
+    else:
+        text = "Click here to check your settings."
+
+
+def donate(update: Update, context: CallbackContext):
+    user = update.effective_message.from_user
+    chat = update.effective_chat  # type: Optional[Chat]
+    bot = context.bot
+    if chat.type == "private":
+        update.effective_message.reply_text(
+            DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
+        )
+
+        if OWNER_ID != 2070119160 and DONATION_LINK:
+            update.effective_message.reply_text(
+                "You can also donate to the person currently running me "
+                "[here]({})".format(DONATION_LINK),
+                parse_mode=ParseMode.MARKDOWN,
+            )
+
+    else:
+        try:
+            bot.send_message(
+                user.id,
+                DONATE_STRING,
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+            )
+
+            update.effective_message.reply_text(
+                "I've PM'ed you about donating to my creator!"
+            )
+        except Unauthorized:
+            update.effective_message.reply_text(
+                "Contact me in PM first to get donation information."
+            )
+
+
+def migrate_chats(update: Update, context: CallbackContext):
+    msg = update.effective_message  # type: Optional[Message]
+    if msg.migrate_to_chat_id:
+        old_chat = update.effective_chat.id
+        new_chat = msg.migrate_to_chat_id
+    elif msg.migrate_from_chat_id:
+        old_chat = msg.migrate_from_chat_id
+        new_chat = update.effective_chat.id
+    else:
+        return
+
+    LOGGER.info("Migrating from %s, to %s", str(old_chat), str(new_chat))
+    for mod in MIGRATEABLE:
+        mod.__migrate__(old_chat, new_chat)
+
+    LOGGER.info("Successfully migrated!")
+    raise DispatcherHandlerStop
+
+
+def main():
+
+    if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
+        try:
+            dispatcher.bot.sendMessage(
+                f"@{SUPPORT_CHAT}",
+                " I am ready to work [.](https://telegra.ph/file/e36d740c802879c68dda6.mp4)",
+                parse_mode=ParseMode.MARKDOWN,
+            )
+        except Unauthorized:
+            LOGGER.warning(
+                "Bot isnt able to send message to support_chat, go and check!",
+            )
+        except BadRequest as e:
+            LOGGER.warning(e.message)
+
+    test_handler = DisableAbleCommandHandler("test", test, run_async=True)
+    start_handler = DisableAbleCommandHandler("start", start, run_async=True)
+
+    help_handler = DisableAbleCommandHandler("help", get_help, run_async=True)
+    help_callback_handler = CallbackQueryHandler(
+        help_button, pattern=r"help_.*", run_async=True
+    )
+
+    settings_handler = DisableAbleCommandHandler("settings", get_settings)
+    settings_callback_handler = CallbackQueryHandler(
+        settings_button, pattern=r"stngs_", run_async=True
+    )
+
+    data_callback_handler = CallbackQueryHandler(
+        marin_callback_data, pattern=r"marin_", run_async=True
+    )
+    donate_handler = DisableAbleCommandHandler("donate", donate, run_async=True)
+    migrate_handler = MessageHandler(
+        Filters.status_update.migrate, migrate_chats, run_async=True
+    )
+
+    # dispatcher.add_handler(test_handler)
+    dispatcher.add_handler(start_handler)
+    dispatcher.add_handler(help_handler)
+    dispatcher.add_handler(data_callback_handler)
+    dispatcher.add_handler(settings_handler)
+    dispatcher.add_handler(help_callback_handler)
+    dispatcher.add_handler(settings_callback_handler)
+    dispatcher.add_handler(migrate_handler)
+    dispatcher.add_handler(donate_handler)
+
+    dispatcher.add_error_handler(error_callback)
+
+    if WEBHOOK:
+        LOGGER.info("Using webhooks.")
+        updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
+
+        if CERT_PATH:
+            updater.bot.set_webhook(url=URL + TOKEN, certificate=open(CERT_PATH, "rb"))
+        else:
+            updater.bot.set_webhook(url=URL + TOKEN)
+
+    else:
+        LOGGER.info(
+            f"Marin, Using long polling. | BOT: [@{dispatcher.bot.username}]"
+        )
+        updater.start_polling(
+            timeout=15,
+            read_latency=4,
+            drop_pending_updates=True,
+            allowed_updates=Update.ALL_TYPES,
+        )
+
+    if len(argv) not in (1, 3, 4):
+        telethn.disconnect()
+    else:
+        telethn.run_until_disconnected()
+
+    updater.idle()
+
+
 try:
-    ubot2.start()
+    ubot.start()
 except BaseException:
     print("Userbot Error! Have you added a STRING_SESSION in deploying??")
     sys.exit(1)
 
-pbot = Client(
-    ":memory:",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    bot_token=TOKEN,
-    workers=min(32, os.cpu_count() + 4),
-)
-apps = []
-apps.append(pbot)
-loop = asyncio.get_event_loop()
-
-async def get_entity(client, entity):
-    entity_client = client
-    if not isinstance(entity, Chat):
-        try:
-            entity = int(entity)
-        except ValueError:
-            pass
-        except TypeError:
-            entity = entity.id
-        try:
-            entity = await client.get_chat(entity)
-        except (PeerIdInvalid, ChannelInvalid):
-            for kp in apps:
-                if kp != client:
-                    try:
-                        entity = await kp.get_chat(entity)
-                    except (PeerIdInvalid, ChannelInvalid):
-                        pass
-                    else:
-                        entity_client = kp
-                        break
-            else:
-                entity = await kp.get_chat(entity)
-                entity_client = kp
-    return entity, entity_client
-
-
-async def eor(msg: Message, **kwargs):
-    func = msg.edit_text if msg.from_user.is_self else msg.reply
-    spec = getfullargspec(func.__wrapped__).args
-    return await func(**{k: v for k, v in kwargs.items() if k in spec})
-
-
-DRAGONS = list(DRAGONS) + list(DEV_USERS)
-DEV_USERS = list(DEV_USERS)
-WOLVES = list(WOLVES)
-DEMONS = list(DEMONS)
-TIGERS = list(TIGERS)
-
-# Load at end to ensure all prev variables have been set
-from EmikoRobot.modules.helper_funcs.handlers import (
-    CustomCommandHandler,
-    CustomMessageHandler,
-    CustomRegexHandler,
-)
-
-# make sure the regex handler can take extra kwargs
-tg.RegexHandler = CustomRegexHandler
-tg.CommandHandler = CustomCommandHandler
-tg.MessageHandler = CustomMessageHandler
+if __name__ == "__main__":
+    LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
+    telethn.start(bot_token=TOKEN)
+    pbot.start()
+    main()
+    idle()
