@@ -85,7 +85,7 @@ HELP_MSG = "Click the button below to get help manu in your pm."
 START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
-────「 [{}](https://telegra.ph/file/29a1f88c7f200d4959359.jpg) 」────
+────「 [{}](https://telegra.ph/file/d5b1b51e1d25769965732.jpg) 」────
 ʜᴇʏᴏ! ᴡᴀᴛᴀꜱʜɪ ᴡᴀ ɴᴏ ʏᴀᴍᴀᴛᴏ ᴅᴇꜱᴜ ᴋᴀ 
 ɪ ᴍ ʜᴇʀᴇ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ
 ʙᴜᴛ ɪ ᴍɪꜱꜱ ᴍʏ ᴏᴅᴇɴ ꜱᴀᴍᴀ ꜱᴏ ɢɪᴠᴇ ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ
@@ -120,7 +120,7 @@ buttons = [
 
 
 HELP_STRINGS = """
-Hey there! Myself [Yamato](https://telegra.ph/file/733ad56ef80d133fac966.jpg).
+Hey there! Myself [Yamato](https://telegra.ph/file/d5b1b51e1d25769965732.jpg).
 ℍ𝕖𝕪𝕠! 𝕎𝕒𝕥𝕒𝕤𝕙𝕚 𝕨𝕒 𝕟𝕠 𝕪𝕒𝕞𝕒𝕥𝕠 𝕕𝕖𝕤𝕦 𝕜𝕒 
 𝕀 𝕞 𝕙𝕖𝕣𝕖 𝕥𝕠 𝕞𝕒𝕟𝕒𝕘𝕖 𝕪𝕠𝕦𝕣 𝕘𝕣𝕠𝕦𝕡
     /help: PM's you this message.
@@ -179,7 +179,7 @@ for module_name in ALL_MODULES:
     if hasattr(imported_module, "__user_settings__"):
         USER_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
 
-GROUP_START_IMG ="https://telegra.ph/file/b1c5be4ec400b3710d987.mp4"
+GROUP_START_IMG ="https://telegra.ph/file/d5b1b51e1d25769965732.jpg"
 
 
 # do not async
@@ -255,7 +255,7 @@ def start(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_animation(
             GROUP_START_IMG,
-            caption="<code> Marin is Here For You\nI am Awake Since</code>: <code>{}</code>".format(
+            caption="<code> Yamato is Here For You\nI am Awake Since</code>: <code>{}</code>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
@@ -269,7 +269,7 @@ def start(update: Update, context: CallbackContext):
                     [
                         InlineKeyboardButton(
                             text="ᴜᴘᴅᴀᴛᴇs",
-                            url="https://telegram.dog/MarinUpdates",
+                            url="https://telegram.org/boa_updates",
                         )
                     ],
                                         [
