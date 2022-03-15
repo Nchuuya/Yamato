@@ -1,29 +1,3 @@
-"""
-MIT License
-
-Copyright (C) 2021 Unknown-san 
-
-This file is part of @MarinRobot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import html
 import importlib
 import json
@@ -48,8 +22,9 @@ from telegram.ext import CallbackContext, CallbackQueryHandler, Filters, Message
 from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
-import MarinRobot.modules.sql.users_sql as sql
-from MarinRobot import (
+import YamatoRobot.modules.sql.users_sql as sql
+from 
+YamatoRobot import (
     BOT_NAME,
     BOT_USERNAME,
     CERT_PATH,
@@ -73,11 +48,11 @@ from MarinRobot import (
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from MarinRobot.modules import ALL_MODULES
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.alternate import typing_action
-from MarinRobot.modules.helper_funcs.chat_status import is_user_admin
-from MarinRobot.modules.helper_funcs.misc import paginate_modules
+from YamatoRobot.modules import ALL_MODULES
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.alternate import typing_action
+from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
+from YamatoRobot.modules.helper_funcs.misc import paginate_modules
 
 HELP_IMG = ""
 
@@ -111,18 +86,20 @@ START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
 ────「 [{}](https://telegra.ph/file/29a1f88c7f200d4959359.jpg) 」────
-*ʜᴇʏ! {},*
-*ɪ ᴀᴍ 𝙈𝘼𝙍𝙄𝙉 ᴀ ᴍᴜʟᴛɪғᴜɴᴄᴛɪᴏɴᴀʟ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.*
+ʜᴇʏᴏ! ᴡᴀᴛᴀꜱʜɪ ᴡᴀ ɴᴏ ʏᴀᴍᴀᴛᴏ ᴅᴇꜱᴜ ᴋᴀ 
+ɪ ᴍ ʜᴇʀᴇ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ
+ʙᴜᴛ ɪ ᴍɪꜱꜱ ᴍʏ ᴏᴅᴇɴ ꜱᴀᴍᴀ ꜱᴏ ɢɪᴠᴇ ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ✓• *Uᴘᴛɪᴍᴇ:* `{}`
 ✓• `{}` *Uꜱᴇʀ, Aᴄʀᴏꜱꜱ* `{}` *Cʜᴀᴛꜱ.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-➛ʜɪᴛ /help ᴛᴏ ᴋɴᴏᴡ ᴍʏ ᴀʙɪʟɪᴛɪᴇs. ××
+➛ type /help
 """
 
 GROUP_START_TEXT = """
-I'm awake already!
-Haven't slept since: {}
+
+ℍ𝕖𝕪𝕠! 𝕎𝕒𝕥𝕒𝕤𝕙𝕚 𝕨𝕒 𝕟𝕠 𝕪𝕒𝕞𝕒𝕥𝕠 𝕕𝕖𝕤𝕦 𝕜𝕒 
+𝕀 𝕞 𝕙𝕖𝕣𝕖 𝕥𝕠 𝕞𝕒𝕟𝕒𝕘𝕖 𝕪𝕠𝕦𝕣 𝕘𝕣𝕠𝕦𝕡 {}
 """
 
 buttons = [
@@ -133,26 +110,25 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ɪɴғᴏ", callback_data="marin_basichelp"),
-        InlineKeyboardButton(text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""),
+        InlineKeyboardButton(text="My Haki Powers", callback_data="marin_basichelp"),
+        InlineKeyboardButton(text="Updates", url="https://t.me/boa_updates"),
     ],
     [
-        InlineKeyboardButton(text="Hᴇʟᴘ & Cᴏᴍᴍᴀɴᴅꜱ", callback_data="help_back"),
+        InlineKeyboardButton(text="My Devil Fruit Powers:", callback_data="help_back"),
     ],
 ]
 
 
 HELP_STRINGS = """
-Hey there! Myself [Marin](https://telegra.ph/file/733ad56ef80d133fac966.jpg).
-I'm a Queen For Fun and help admins manage their groups ! Have a look at the following for an idea of some of the things I can help you with.
-*Main* commands available:
- ➛ /help: PM's you this message.
- ➛ /help <module name>: PM's you info about that module.
- ➛ /bug <error name> : inform support about that error 
- ➛ /donate: information on how to donate!
- ➛ /settings: 
-   ❂ in PM: will send you your settings for all supported modules.
-   ❂ in a group: will redirect you to pm, with all that chat's settings.
+Hey there! Myself [Yamato](https://telegra.ph/file/733ad56ef80d133fac966.jpg).
+ℍ𝕖𝕪𝕠! 𝕎𝕒𝕥𝕒𝕤𝕙𝕚 𝕨𝕒 𝕟𝕠 𝕪𝕒𝕞𝕒𝕥𝕠 𝕕𝕖𝕤𝕦 𝕜𝕒 
+𝕀 𝕞 𝕙𝕖𝕣𝕖 𝕥𝕠 𝕞𝕒𝕟𝕒𝕘𝕖 𝕪𝕠𝕦𝕣 𝕘𝕣𝕠𝕦𝕡
+    /help: PM's you this message.
+    /bug <error name> : inform support about that error 
+    /donate: information on how to donate!
+    /settings: 
+   ❤️ in PM: will send you your settings for all supported modules.
+   💜 in a group: will redirect you to pm, with all that chat's settings.
 """
 
 DONATE_STRING = """❂ I'm Free for Everyone ❂"""
