@@ -2,7 +2,8 @@ import threading
 
 from sqlalchemy import Column, String
 
-from MarinRobot.modules.sql import BASE, SESSION # import your file name
+from MarinRobot.modules.sql import BASE, SESSION  # import your file name
+
 
 class VanitasUser(BASE):
     __tablename__ = "vanitasuser"
@@ -29,8 +30,10 @@ class VanitasChats(BASE):
     def __init__(self, chat_id):
         self.chat_id = chat_id
 
+
 VanitasChats.__table__.create(checkfirst=True)
 INSERTION_LOCK = threading.RLock()
+
 
 def unbanuser(chat_id, user_id):
     with INSERTION_LOCK:
@@ -44,6 +47,7 @@ def is_vanitasuser(chat_id, user_id):
         return SESSION.query(VanitasUser).get((str(chat_id), user_id))
     finally:
         SESSION.close()
+
 
 def is_vanitas(chat_id):
     try:
