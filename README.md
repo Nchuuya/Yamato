@@ -17,7 +17,7 @@
 * Now  Deploy the bot 
 * Start your Bot and enjoy.
 # Deploy to Heroku
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/MugiwaranoKizoku/Yamato"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku width= "220" Height= "220"/></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/MugiwaranoKizoku/Yamato"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku width= "220" Height= "90"/></a></p>
 
 
 
