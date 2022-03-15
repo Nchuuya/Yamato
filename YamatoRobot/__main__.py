@@ -120,7 +120,7 @@ buttons = [
 
 
 HELP_STRINGS = """
-Hey there! Myself [Yamato](https://telegra.ph/file/d5b1b51e1d25769965732.jpg).
+Hey there! Myself [Yamato](https://telegra.ph/file/ca0ceefafdf5a3188d875.jpg).
 ℍ𝕖𝕪𝕠! 𝕎𝕒𝕥𝕒𝕤𝕙𝕚 𝕨𝕒 𝕟𝕠 𝕪𝕒𝕞𝕒𝕥𝕠 𝕕𝕖𝕤𝕦 𝕜𝕒 
 𝕀 𝕞 𝕙𝕖𝕣𝕖 𝕥𝕠 𝕞𝕒𝕟𝕒𝕘𝕖 𝕪𝕠𝕦𝕣 𝕘𝕣𝕠𝕦𝕡
     /help: PM's you this message.
@@ -255,7 +255,7 @@ def start(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_animation(
             GROUP_START_IMG,
-            caption="<code> Yamato is Here For You\nI am Awake Since</code>: <code>{}</code>".format(
+            caption="<code> Yamato is Here For You\nI am Awake Since</code>: <code>{}</code>[https://telegra.ph/file/eaa3c5ab68c2927038f16.jpg]".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
@@ -263,13 +263,13 @@ def start(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/NobaraSupport"
+                            text="Support", url=f"https://t.me/BoaHancock_Support"
                         )
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴜᴘᴅᴀᴛᴇs",
-                            url="https://telegram.org/boa_updates",
+                            text="Updates",
+                            url="https://t.me/boa_updates",
                         )
                     ],
                                         [
@@ -407,7 +407,7 @@ def help_button(update, context):
 
     except BadRequest:
         pass
-GROUP_START_IMG = "https://telegra.ph/file/e36d740c802879c68dda6.mp4"
+GROUP_START_IMG = "https://telegra.ph/file/eaa3c5ab68c2927038f16.jpg"
 
 def marin_callback_data(update, context):
     query = update.callback_query
@@ -415,12 +415,12 @@ def marin_callback_data(update, context):
     if query.data == "marin_":
         query.message.edit_text(
             text="""
-        ❍[Owner](https://t.me/Xtheanonymous)💜
-        ❍[Updates](https://t.me/NobaraSupport)🧡
-        ❍[Suppσrt](https://t.me/NobaraSupport)🤍
-        ❍[Suppσrt](https://t.me/NobaraSupport)💚
-        ❍ [ChatGrp](https://t.me/AnimeChatAura)❤️
-        ✨[Vc Player Help](https://telegra.ph/file/bc78aaf26976f892d6478.jpg)✨""",
+        ❍[Owner](https://t.me/zerohisoka)💜
+        ❍[Updates](https://t.me/BoaHancock_Support)🧡
+        ❍[Suppσrt](https://t.me/BoaHancock_Support)🤍
+        ❍[Suppσrt](https://t.me/BoaHancock_Support)💚
+        ❍ [ChatGrp](https://t.me/straydogs)❤️
+        ✨[Vc Player Help](https://telegra.ph/file/357e3aa3d58f17e81cb81.jpg)✨""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -432,7 +432,7 @@ def marin_callback_data(update, context):
             text=f"*Here's basic Help regarding* *How to use Me?*"
             f"\n\n• Firstly Add {dispatcher.bot.first_name} to your group by pressing [here](http://t.me/{dispatcher.bot.username}?startgroup=true)\n"
             f"\n• After adding promote me manually with full rights for faster experience.\n"
-            f"\n• Than send `/admincache@MarinRobot` in that chat to refresh admin list in My database.\n"
+            f"\n• Than send `/admincache@YamatoRobot` in that chat to refresh admin list in My database.\n"
             f"\n\n*All done now use below given button's to know about use!*\n"
             f"",
             parse_mode=ParseMode.MARKDOWN,
@@ -440,20 +440,20 @@ def marin_callback_data(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ᴀᴅᴍɪɴ", callback_data="marin_admin"),
-                        InlineKeyboardButton(text="ɴᴏᴛᴇs", callback_data="marin_notes"),
+                        InlineKeyboardButton(text="Admins", callback_data="marin_admin"),
+                        InlineKeyboardButton(text="Notes", callback_data="marin_notes"),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="sᴜᴘᴘᴏʀᴛ", callback_data="NobaraSupport"
+                            text="Support", callback_data="YamatoSupport"
                         ),
                         InlineKeyboardButton(
-                            text="ᴄʀᴇᴅɪᴛ", callback_data="marin_credits"
+                            text="Credits", callback_data="marin_credits"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_back"
+                            text="♡Back♡", callback_data="marin_back"
                         ),
                     ],
                 ]
@@ -462,7 +462,7 @@ def marin_callback_data(update, context):
     elif query.data == "marin_admin":
         query.message.edit_text(
             text=f"*Let's make your group bit effective now*"
-            f"\nCongragulations, Miss Marin now ready to manage your group."
+            f"\nCongragulations, Yamato now ready to manage your group."
             f"\n\n*Admin Tools*"
             f"\nBasic Admin tools help you to protect and powerup your group."
             f"\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
@@ -827,7 +827,7 @@ def main():
         try:
             dispatcher.bot.sendMessage(
                 f"@{SUPPORT_CHAT}",
-                " I am ready to work [.](https://telegra.ph/file/e36d740c802879c68dda6.mp4)",
+                " I am ready to work [.]()",
                 parse_mode=ParseMode.MARKDOWN,
             )
         except Unauthorized:
@@ -881,7 +881,7 @@ def main():
 
     else:
         LOGGER.info(
-            f"Marin, Using long polling. | BOT: [@{dispatcher.bot.username}]"
+            f"Yamato, Using long polling. | BOT: [@{dispatcher.bot.username}]"
         )
         updater.start_polling(
             timeout=15,
