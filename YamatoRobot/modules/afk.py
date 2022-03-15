@@ -34,7 +34,12 @@ from telegram.ext import Filters, MessageHandler
 from MarinRobot import REDIS, dispatcher
 from MarinRobot.modules.disable import DisableAbleCommandHandler
 from MarinRobot.modules.helper_funcs.readable_time import get_readable_time
-from MarinRobot.modules.redis.afk_redis import afk_reason, end_afk, is_user_afk, start_afk
+from MarinRobot.modules.redis.afk_redis import (
+    afk_reason,
+    end_afk,
+    is_user_afk,
+    start_afk,
+)
 from MarinRobot.modules.users import get_user_id
 
 AFK_GROUP = 7

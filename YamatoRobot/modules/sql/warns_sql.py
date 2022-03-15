@@ -33,6 +33,7 @@ from MarinRobot.modules.sql import BASE, SESSION
 
 from sqlalchemy.sql.sqltypes import BigInteger
 
+
 class Warns(BASE):
     __tablename__ = "warns"
 
