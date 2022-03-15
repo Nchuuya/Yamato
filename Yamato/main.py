@@ -55,6 +55,7 @@ from Yamato.modules.helper_funcs.misc import paginate_modules
 
 HELP_IMG = "https://telegra.ph/file/d5b1b51e1d25769965732.jpg"
 
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -177,7 +178,7 @@ for module_name in ALL_MODULES:
     if hasattr(imported_module, "__user_settings__"):
         USER_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
 
-GROUP_START_IMG ="https://telegra.ph/file/b1c5be4ec400b3710d987.mp4"
+GROUP_START_IMG = "https://telegra.ph/file/b1c5be4ec400b3710d987.mp4"
 
 
 # do not async
@@ -270,7 +271,7 @@ def start(update: Update, context: CallbackContext):
                             url="https://telegram.dog/MarinUpdates",
                         )
                     ],
-                                        [
+                    [
                         InlineKeyboardButton(
                             text="AOGIRI UNION",
                             url="https://telegram.dog/AogiriNetwork",
@@ -405,7 +406,10 @@ def help_button(update, context):
 
     except BadRequest:
         pass
+
+
 GROUP_START_IMG = "https://telegra.ph/file/e36d740c802879c68dda6.mp4"
+
 
 def marin_callback_data(update, context):
     query = update.callback_query
@@ -450,9 +454,7 @@ def marin_callback_data(update, context):
                         ),
                     ],
                     [
-                        InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_back"
-                        ),
+                        InlineKeyboardButton(text="♡Bᴀᴄᴋ♡", callback_data="marin_back"),
                     ],
                 ]
             ),
@@ -470,13 +472,7 @@ def marin_callback_data(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
-                        )
-                    ]
-                ]
+                [[InlineKeyboardButton(text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp")]]
             ),
         )
 
@@ -488,13 +484,7 @@ def marin_callback_data(update, context):
             f"\n\nYou can also set buttons for notes and filters (refer help menu)",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
-                        )
-                    ]
-                ]
+                [[InlineKeyboardButton(text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp")]]
             ),
         )
     elif query.data == "Nobarasupport":
@@ -506,7 +496,8 @@ def marin_callback_data(update, context):
                     [
                         InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", url="t.me/NobaraSupport"),
                         InlineKeyboardButton(
-                            text="ᴠᴄ ʜᴇʟᴘ", url="https://telegra.ph/file/bc78aaf26976f892d6478.jpg"
+                            text="ᴠᴄ ʜᴇʟᴘ",
+                            url="https://telegra.ph/file/bc78aaf26976f892d6478.jpg",
                         ),
                     ],
                     [
@@ -878,9 +869,7 @@ def main():
             updater.bot.set_webhook(url=URL + TOKEN)
 
     else:
-        LOGGER.info(
-            f"Marin, Using long polling. | BOT: [@{dispatcher.bot.username}]"
-        )
+        LOGGER.info(f"Marin, Using long polling. | BOT: [@{dispatcher.bot.username}]")
         updater.start_polling(
             timeout=15,
             read_latency=4,
