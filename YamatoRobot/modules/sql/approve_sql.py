@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql.sqltypes import BigInteger
-from MarinRobot.modules.sql import BASE, SESSION
+from YamatoRobot.modules.sql import BASE, SESSION
 
 
 class Approvals(BASE):
