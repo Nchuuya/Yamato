@@ -5,8 +5,8 @@ import requests
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
-from MarinRobot import dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot import dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
 
 
 def anime_quote():
