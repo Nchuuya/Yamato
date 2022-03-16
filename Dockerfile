@@ -64,12 +64,12 @@ RUN apt update && apt upgrade -y && \
 # Pypi package Repo upgrade
 RUN pip3 install --upgrade pip setuptools
 
-# Copy Python Requirements to /root/MarinRobot
-RUN git clone -b shiken https://github.com/Unknown-san/MarinRobot /root/MarinRobot
-WORKDIR /root/MarinRobot
+# Copy Python Requirements to /root/YamatoRobot
+RUN git clone -b shiken https://github.com/Nchuuya/YamatoRobot /root/YamatoRobot
+WORKDIR /root/YamatoRobot
 
-#Copy config file to /root/MarinRobot/MarinRobot
-COPY ./MarinRobot/sample_config.py ./MarinRobot/config.py* /root/MarinRobot/MarinRobot/
+#Copy config file to /root/YamatoRobot/YamatoRobot
+COPY ./YamatoRobot/sample_config.py ./YamatoRobot/config.py* /root/MarinRobot/MarinRobot/
 
 ENV PATH="/home/bot/bin:$PATH"
 
@@ -77,4 +77,4 @@ ENV PATH="/home/bot/bin:$PATH"
 RUN pip3 install -U -r requirements.txt
 
 # Starting Worker
-CMD ["python3","-m","MarinRobot"]
+CMD ["python3","-m","YamatoRobot"]
