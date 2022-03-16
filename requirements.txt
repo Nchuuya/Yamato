@@ -32,7 +32,7 @@ telegraph==2.1.0
 tgcrypto==1.2.2
 youtube_dl==2021.12.17
 youtube_search==2.1.0
-pytube==11.0.1
+pytube==12.0.0
 youtube_search_python==1.4.9
 pymongo==3.12.0
 motor>=2.1.0,<2.6.0
@@ -59,7 +59,7 @@ search_engine_parser
 pytz==2021.3
 html2text==2020.1.16
 NumPy==1.21.2
-opencv-python-headless==4.5.4.60
+opencv-python-headless==4.5.5.64
 uvloop==0.16.0
 python-dotenv==0.19.1
 gpytranslate==1.4.0
