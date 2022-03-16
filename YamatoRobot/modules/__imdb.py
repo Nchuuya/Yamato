@@ -3,7 +3,7 @@ import re
 import bs4
 import requests
 
-from MarinRobot.events import register
+from YamatoRobot.events import register
 
 langi = "en"
 
