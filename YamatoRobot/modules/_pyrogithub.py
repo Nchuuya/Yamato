@@ -2,8 +2,8 @@
 import aiohttp
 from pyrogram import filters
 
-from MarinRobot import pbot
-from MarinRobot.utils.errors import capture_err
+from YamatoRobot import pbot
+from YamatoRobot.utils.errors import capture_err
 
 __mod_name__ = "Github"
 
