@@ -7,7 +7,7 @@ import time
 import aiohttp
 import httpx
 import spamwatch
-from MarinRobot.utils import Sylviorus
+from YamatoRobot.utils import Sylviorus
 import telegram.ext as tg
 from aiohttp import ClientSession
 from motor import motor_asyncio
@@ -295,7 +295,7 @@ SPRYZONS = list(SPRYZONS)
 FAFNIRS = list(FAFNIRS)
 
 # Load at end to ensure all prev variables have been set
-from MarinRobot.modules.helper_funcs.handlers import (
+from YamatoRobot.modules.helper_funcs.handlers import (
     CustomCommandHandler,
     CustomMessageHandler,
     CustomRegexHandler,
