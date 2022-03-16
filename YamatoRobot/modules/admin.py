@@ -5,10 +5,10 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from telegram.utils.helpers import mention_html
 
-from MarinRobot import REDLIONS, dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.alternate import send_message, typing_action
-from MarinRobot.modules.helper_funcs.chat_status import (
+from YamatoRobot import REDLIONS, dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.alternate import send_message, typing_action
+from YamatoRobot.modules.helper_funcs.chat_status import (
     ADMIN_CACHE,
     bot_admin,
     can_pin,
@@ -16,12 +16,12 @@ from MarinRobot.modules.helper_funcs.chat_status import (
     connection_status,
     user_admin,
 )
-from MarinRobot.modules.helper_funcs.extraction import (
+from YamatoRobot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
 )
-from MarinRobot.modules.log_channel import loggable
-from MarinRobot.utils.admin_rights import (
+from YamatoRobot.modules.log_channel import loggable
+from YamatoRobot.utils.admin_rights import (
     user_can_changeinfo,
     user_can_pin,
     user_can_promote,
