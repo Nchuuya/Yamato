@@ -1,6 +1,6 @@
 from telethon import events
 
-from MarinRobot import telethn
+from YamatoRobot import telethn
 
 
 def register(**args):
@@ -71,10 +71,10 @@ def load_module(shortname):
     elif shortname.endswith("_"):
         import importlib
 
-        import MarinRobot.events
+        import YamatoRobot.events
 
-        path = Path(f"MarinRobot/modules/{shortname}.py")
-        name = "MarinRobot.modules.{}".format(shortname)
+        path = Path(f"YamatoRobot/modules/{shortname}.py")
+        name = "YamatoRobot.modules.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
@@ -82,16 +82,16 @@ def load_module(shortname):
     else:
         import importlib
 
-        import MarinRobot.events
+        import YamatoRobot.events
 
-        path = Path(f"MarinRobot/modules/{shortname}.py")
-        name = "MarinRobot.modules.{}".format(shortname)
+        path = Path(f"YamatoRobot/modules/{shortname}.py")
+        name = "YamatoRobot.modules.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.register = register
-        mod.MarinRobot = MarinRobot
+        mod.YamatoRobot = YamatoRobot
         mod.tbot = telethn
         mod.logger = logging.getLogger(shortname)
         spec.loader.exec_module(mod)
-        sys.modules["MarinRobot.modules." + shortname] = mod
+        sys.modules["YamatoRobot.modules." + shortname] = mod
         print("Successfully imported " + shortname)
