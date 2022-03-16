@@ -11,7 +11,7 @@ pyrate-limiter==2.4.7
 lxml==4.6.5
 nltk==3.6.6
 pillow>=4.2.0
-pretty-errors==1.2.24
+pretty-errors==1.2.25
 psutil==5.8.0
 pynewtonmath==1.0.1
 python-telegram-bot==13.10
