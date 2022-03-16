@@ -7,7 +7,7 @@ emoji==1.7.0
 feedparser==6.0.8
 googletrans==4.0.0-rc1
 vanitas
-pyrate-limiter==2.4.7
+pyrate-limiter==2.6.0
 lxml==4.6.5
 nltk==3.6.6
 pillow>=4.2.0
