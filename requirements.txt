@@ -1,7 +1,7 @@
 alphabet-detector==0.0.7
 beautifulsoup4==4.10.0
 bleach==4.1.0
-cachetools==4.2.2
+cachetools==5.0.0
 CurrencyConverter
 emoji==1.7.0
 feedparser==6.0.8
@@ -39,7 +39,7 @@ motor>=2.1.0,<2.6.0
 dnspython==2.1.0
 redis==3.5.3
 gtts==2.2.4
-cloudscraper==1.2.58
+cloudscraper==1.2.60
 wget==3.2
 tswift==0.7.0
 lyricsgenius==3.0.1
@@ -50,7 +50,7 @@ aioredis==2.0.0
 odmantic==0.3.5
 aiohttp
 pykeyboard
-aiofiles==0.7.0
+aiofiles==0.8.0
 hachoir==3.1.2
 carbonnow
 bing_image_downloader==1.1.2
@@ -59,7 +59,7 @@ search_engine_parser
 pytz==2021.3
 html2text==2020.1.16
 NumPy==1.21.2
-opencv-python-headless==4.5.4.60
+opencv-python-headless==4.5.5.64
 uvloop==0.16.0
 python-dotenv==0.19.1
 gpytranslate==1.4.0
@@ -82,7 +82,7 @@ git+https://github.com/Awesome-RJ/GoGoAnimeAPI.git
 better_profanity==0.7.0
 pydub==0.25.1
 nudepy==0.5.1
-textblob==0.15.3
+textblob==0.17.1
 requests_html==0.10.0
 bs4==0.0.1
 multicolorcaptcha==1.2.0
