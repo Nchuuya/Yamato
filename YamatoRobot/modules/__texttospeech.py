@@ -3,8 +3,8 @@ import os
 from gtts import gTTS, gTTSError
 from telethon.tl import functions, types
 
-from MarinRobot import telethn as tbot
-from MarinRobot.events import register
+from YamatoRobot import telethn as tbot
+from YamatoRobot.events import register
 
 
 async def is_register_admin(chat, user):
