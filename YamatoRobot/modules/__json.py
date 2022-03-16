@@ -4,8 +4,8 @@ from telethon import types
 from telethon.tl import functions, types
 from telethon.tl.types import *
 
-from MarinRobot import telethn as borg
-from MarinRobot.events import register
+from YamatoRobot import telethn as borg
+from YamatoRobot.events import register
 
 
 async def is_register_admin(chat, user):
