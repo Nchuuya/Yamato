@@ -11,7 +11,7 @@ pyrate-limiter==2.4.7
 lxml==4.6.5
 nltk==3.6.6
 pillow>=4.2.0
-pretty-errors==1.2.24
+pretty-errors==1.2.25
 psutil==5.8.0
 pynewtonmath==1.0.1
 python-telegram-bot==13.10
@@ -62,7 +62,7 @@ NumPy==1.21.2
 opencv-python-headless==4.5.4.60
 uvloop==0.16.0
 python-dotenv==0.19.1
-gpytranslate==1.3.0
+gpytranslate==1.4.0
 glitch_this==1.0.2
 countryinfo==0.1.2
 faker==9.3.1
