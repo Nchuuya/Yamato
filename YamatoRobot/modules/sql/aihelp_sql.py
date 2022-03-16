@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, String
 
-from MarinRobot.modules.sql import BASE, SESSION
+from YamatoRobot.modules.sql import BASE, SESSION
 
 
 class aiChats(BASE):
