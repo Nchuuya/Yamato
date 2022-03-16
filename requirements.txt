@@ -9,7 +9,7 @@ googletrans==4.0.0-rc1
 vanitas
 pyrate-limiter==2.6.0
 lxml==4.6.5
-nltk==3.6.6
+nltk==3.7
 pillow>=4.2.0
 pretty-errors==1.2.25
 psutil==5.8.0
