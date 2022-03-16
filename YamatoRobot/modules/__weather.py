@@ -6,9 +6,9 @@ from telethon import *
 from telethon.tl import functions, types
 from telethon.tl.types import *
 
-from MarinRobot import *
-from MarinRobot import telethn as tbot
-from MarinRobot.events import register
+from YamatoRobot import *
+from YamatoRobot import telethn as tbot
+from YamatoRobot.events import register
 
 
 async def is_register_admin(chat, user):
