@@ -12,8 +12,8 @@ from bs4 import BeautifulSoup
 from PIL import Image
 from search_engine_parser import GoogleSearch
 
-from MarinRobot import telethn as tbot
-from MarinRobot.events import register
+from YamatoRobot import telethn as tbot
+from YamatoRobot.events import register
 
 opener = urllib.request.build_opener()
 useragent = "Mozilla/5.0 (Linux; Android 9; SM-G960F Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36"
@@ -277,6 +277,6 @@ __help__ = """
  |• `/github` <username>*:* Get information about a GitHub user.
  |• `/country` <country name>*:* Gathering info about given country
  |• `/imdb` <Movie name>*:* Get full info about a movie with imdb.com
- |• Nezuko <query>*:*   Nezuko answers the query
+ |• Yamato <query>*:*   Nezuko answers the query
   💡Ex: `Nezuko where is India?`
 """
