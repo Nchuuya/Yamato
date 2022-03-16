@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Boolean, Column, Integer, UnicodeText
 
-from MarinRobot.modules.sql import BASE, SESSION
+from YamatoRobot.modules.sql import BASE, SESSION
 from sqlalchemy.sql.sqltypes import BigInteger
 
 
