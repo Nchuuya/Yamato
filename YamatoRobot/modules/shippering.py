@@ -3,9 +3,9 @@ from datetime import datetime
 
 from pyrogram import filters
 
-from MarinRobot import pbot as app
-from MarinRobot.modules.mongo.couples_mongo import get_couple, save_couple
-from MarinRobot.utils.errors import capture_err
+from YamatoRobot import pbot as app
+from YamatoRobot.modules.mongo.couples_mongo import get_couple, save_couple
+from YamatoRobot.utils.errors import capture_err
 
 
 # Date and time
