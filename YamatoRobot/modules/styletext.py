@@ -1,8 +1,8 @@
 from telegram import ParseMode
 
-from MarinRobot import dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.alternate import typing_action
+from YamatoRobot import dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.alternate import typing_action
 
 normiefont = [
     "a",
