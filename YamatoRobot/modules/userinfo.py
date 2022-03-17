@@ -1,29 +1,3 @@
-"""
-MIT License
-
-Copyright (C) 2021 Unknown-san
-
-This file is part of @MarinRobot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import datetime
 import html
 import platform
@@ -41,7 +15,7 @@ from telethon import events
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 
-import MarinRobot.modules.sql.userinfo_sql as sql
+import YamatoRobot.modules.sql.userinfo_sql as sql
 from MarinRobot import (
     DEV_USERS,
     FAFNIRS,
@@ -56,13 +30,13 @@ from MarinRobot import (
     sw,
     telethn,
 )
-from MarinRobot.__main__ import STATS, TOKEN, USER_INFO
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.chat_status import sudo_plus
-from MarinRobot.modules.helper_funcs.extraction import extract_user
-from MarinRobot.modules.redis.afk_redis import afk_reason, is_user_afk
-from MarinRobot.modules.sql.global_bans_sql import is_user_gbanned
-from MarinRobot.modules.sql.users_sql import get_user_num_chats
+from YamatoRobot.__main__ import STATS, TOKEN, USER_INFO
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.chat_status import sudo_plus
+from YamatoRobot.modules.helper_funcs.extraction import extract_user
+from YamatoRobot.modules.redis.afk_redis import afk_reason, is_user_afk
+from YamatoRobot.modules.sql.global_bans_sql import is_user_gbanned
+from YamatoRobot.modules.sql.users_sql import get_user_num_chats
 
 
 def no_by_per(totalhp, percentage):
