@@ -1,29 +1,3 @@
-"""
-MIT License
-
-Copyright (C) 2021 Unknown-san
-
-This file is part of @MarinRobot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import ast
 import random
 import re
@@ -48,14 +22,14 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import escape_markdown, mention_markdown
 
-import MarinRobot.modules.sql.notes_sql as sql
-from MarinRobot import JOIN_LOGGER, LOGGER, REDLIONS, SUPPORT_CHAT, dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.chat_status import connection_status, user_admin
-from MarinRobot.modules.helper_funcs.handlers import MessageHandlerChecker
-from MarinRobot.modules.helper_funcs.misc import build_keyboard, revert_buttons
-from MarinRobot.modules.helper_funcs.msg_types import get_note_type
-from MarinRobot.modules.helper_funcs.string_handling import escape_invalid_curly_brackets
+import YamatoRobot.modules.sql.notes_sql as sql
+from YamatoRobot import JOIN_LOGGER, LOGGER, REDLIONS, SUPPORT_CHAT, dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.chat_status import connection_status, user_admin
+from YamatoRobot.modules.helper_funcs.handlers import MessageHandlerChecker
+from YamatoRobot.modules.helper_funcs.misc import build_keyboard, revert_buttons
+from YamatoRobot.modules.helper_funcs.msg_types import get_note_type
+from YamatoRobot.modules.helper_funcs.string_handling import escape_invalid_curly_brackets
 
 FILE_MATCHER = re.compile(r"^###file_id(!photo)?###:(.*?)(?:\s|$)")
 STICKER_MATCHER = re.compile(r"^###sticker(!photo)?###:")
