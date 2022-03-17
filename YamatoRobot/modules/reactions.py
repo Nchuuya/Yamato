@@ -3,8 +3,8 @@ import random
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from MarinRobot import dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot import dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
 
 reactions = [
     "( ͡° ͜ʖ ͡°)",
