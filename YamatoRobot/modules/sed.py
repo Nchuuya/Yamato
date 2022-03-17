@@ -5,9 +5,9 @@ import telegram
 from telegram import Update
 from telegram.ext import CallbackContext, Filters
 
-from MarinRobot import LOGGER, dispatcher
-from MarinRobot.modules.disable import DisableAbleMessageHandler
-from MarinRobot.modules.helper_funcs.regex_helper import infinite_loop_check
+from YamatoRobot import LOGGER, dispatcher
+from YamatoRobot.modules.disable import DisableAbleMessageHandler
+from YamatoRobot.modules.helper_funcs.regex_helper import infinite_loop_check
 
 DELIMITERS = ("/", ":", "|", "_")
 
