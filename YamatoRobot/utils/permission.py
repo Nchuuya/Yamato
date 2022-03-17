@@ -3,9 +3,9 @@ from functools import wraps
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from pyrogram.types import Message
 
-from MarinRobot import REDLIONS
-from MarinRobot import pbot as app
-from MarinRobot.pyrogramee.pluginshelper import member_permissions
+from YamatoRobot import REDLIONS
+from YamatoRobot import pbot as app
+from YamatoRobot.pyrogramee.pluginshelper import member_permissions
 
 
 async def authorised(func, subFunc2, client, message, *args, **kwargs):
