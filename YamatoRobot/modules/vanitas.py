@@ -12,7 +12,7 @@ import requests
 from telegram.ext.filters import Filters
 from telegram.parsemode import ParseMode
 
-import MarinRobot.modules.sql.vanitas_sql as sql
+import YamatoRobot.modules.sql.vanitas_sql as sql
 from vanitas import User as vanitas # pip install vanitas
 
 from time import sleep
@@ -25,10 +25,10 @@ from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
 from telegram.error import BadRequest, RetryAfter, Unauthorized
 from telegram.utils.helpers import mention_html, mention_markdown, escape_markdown
 
-from MarinRobot.modules.helper_funcs.filters import CustomFilters
-from MarinRobot.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
-from MarinRobot import dispatcher, updater, SUPPORT_CHAT, SYL
-from MarinRobot.modules.log_channel import gloggable
+from YamatoRobot.modules.helper_funcs.filters import CustomFilters
+from YamatoRobot.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
+from YamatoRobot import dispatcher, updater, SUPPORT_CHAT, SYL
+from YamatoRobot.modules.log_channel import gloggable
 
 v = vanitas()
 
