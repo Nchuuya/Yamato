@@ -4,8 +4,8 @@ import requests
 from telethon import types
 from telethon.tl import functions
 
-from MarinRobot import telethn as client
-from MarinRobot.events import register
+from YamatoRobot import telethn as client
+from YamatoRobot.events import register
 
 
 async def is_register_admin(chat, user):
