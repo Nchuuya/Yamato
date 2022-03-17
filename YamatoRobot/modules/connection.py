@@ -1,29 +1,3 @@
-"""
-MIT License
-
-Copyright (C) 2021 Unknown-san
-
-This file is part of @MarinRobot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import re
 import time
 
@@ -31,10 +5,10 @@ from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CallbackQueryHandler, CommandHandler
 
-import MarinRobot.modules.sql.connection_sql as sql
-from MarinRobot import DEV_USERS, REDLIONS, dispatcher
-from MarinRobot.modules.helper_funcs import chat_status
-from MarinRobot.modules.helper_funcs.alternate import send_message, typing_action
+import YamatoRobot.modules.sql.connection_sql as sql
+from YamatoRobot import DEV_USERS, REDLIONS, dispatcher
+from YamatoRobot.modules.helper_funcs import chat_status
+from YamatoRobot.modules.helper_funcs.alternate import send_message, typing_action
 
 user_admin = chat_status.user_admin
 
