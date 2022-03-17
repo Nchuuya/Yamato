@@ -7,22 +7,22 @@ from telegram import Message, ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler
 
-# from MarinRobot.modules.sql import warns_sql as warnssql
-import MarinRobot.modules.sql.blacklist_sql as blacklistsql
+# from YamatoRobot.modules.sql import warns_sql as warnssql
+import YamatoRobot.modules.sql.blacklist_sql as blacklistsql
 
-# from MarinRobot.modules.sql import cust_filters_sql as filtersql
-# import MarinRobot.modules.sql.welcome_sql as welcsql
-import MarinRobot.modules.sql.locks_sql as locksql
-import MarinRobot.modules.sql.notes_sql as sql
+# from YamatoRobot.modules.sql import cust_filters_sql as filtersql
+# import YamatoRobot.modules.sql.welcome_sql as welcsql
+import YamatoRobot.modules.sql.locks_sql as locksql
+import YamatoRobot.modules.sql.notes_sql as sql
 
-# from MarinRobot.modules.rules import get_rules
-import MarinRobot.modules.sql.rules_sql as rulessql
-from MarinRobot import JOIN_LOGGER, LOGGER, OWNER_ID, SUPPORT_CHAT, dispatcher
-from MarinRobot.__main__ import DATA_IMPORT
-from MarinRobot.modules.connection import connected
-from MarinRobot.modules.helper_funcs.alternate import typing_action
-from MarinRobot.modules.helper_funcs.chat_status import user_admin
-from MarinRobot.modules.sql import disable_sql as disabledsql
+# from YamatoRobot.modules.rules import get_rules
+import YamatoRobot.modules.sql.rules_sql as rulessql
+from YamatoRobot import JOIN_LOGGER, LOGGER, OWNER_ID, SUPPORT_CHAT, dispatcher
+from YamatoRobot.__main__ import DATA_IMPORT
+from YamatoRobot.modules.connection import connected
+from YamatoRobot.modules.helper_funcs.alternate import typing_action
+from YamatoRobot.modules.helper_funcs.chat_status import user_admin
+from YamatoRobot.modules.sql import disable_sql as disabledsql
 
 
 @user_admin
