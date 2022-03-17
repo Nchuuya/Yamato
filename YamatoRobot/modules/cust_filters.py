@@ -1,29 +1,3 @@
-"""
-MIT License
-
-Copyright (C) 2021 Unknown-san
-
-This file is part of @MarinRobot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import random
 import re
 from html import escape
@@ -39,23 +13,23 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import escape_markdown, mention_html
 
-from MarinRobot import LOGGER, REDLIONS, dispatcher
-from MarinRobot.modules.connection import connected
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.alternate import send_message, typing_action
-from MarinRobot.modules.helper_funcs.chat_status import user_admin
-from MarinRobot.modules.helper_funcs.extraction import extract_text
-from MarinRobot.modules.helper_funcs.filters import CustomFilters
-from MarinRobot.modules.helper_funcs.handlers import MessageHandlerChecker
-from MarinRobot.modules.helper_funcs.misc import build_keyboard_parser
-from MarinRobot.modules.helper_funcs.msg_types import get_filter_type
-from MarinRobot.modules.helper_funcs.string_handling import (
+from YamatoRobot import LOGGER, REDLIONS, dispatcher
+from YamatoRobot.modules.connection import connected
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.alternate import send_message, typing_action
+from YamatoRobot.modules.helper_funcs.chat_status import user_admin
+from YamatoRobot.modules.helper_funcs.extraction import extract_text
+from YamatoRobot.modules.helper_funcs.filters import CustomFilters
+from YamatoRobot.modules.helper_funcs.handlers import MessageHandlerChecker
+from YamatoRobot.modules.helper_funcs.misc import build_keyboard_parser
+from YamatoRobot.modules.helper_funcs.msg_types import get_filter_type
+from YamatoRobot.modules.helper_funcs.string_handling import (
     button_markdown_parser,
     escape_invalid_curly_brackets,
     markdown_to_html,
     split_quotes,
 )
-from MarinRobot.modules.sql import cust_filters_sql as sql
+from YamatoRobot.modules.sql import cust_filters_sql as sql
 
 HANDLER_GROUP = 10
 
