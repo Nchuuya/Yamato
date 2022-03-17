@@ -6,7 +6,7 @@ from pyrogram.types import (
     Message,
 )
 
-from MarinRobot import pbot as Client
+from YamatoRobot import pbot as Client
 
 # By @TroJanzHEX
 from MarinRobot.utils.ImageEditor.edit_1 import (  # pylint:disable=import-error
@@ -17,7 +17,7 @@ from MarinRobot.utils.ImageEditor.edit_1 import (  # pylint:disable=import-error
     mix,
     normal_blur,
 )
-from MarinRobot.utils.ImageEditor.edit_2 import (  # pylint:disable=import-error
+from YamatoRobot.utils.ImageEditor.edit_2 import (  # pylint:disable=import-error
     cartoon,
     circle_with_bg,
     circle_without_bg,
@@ -27,13 +27,13 @@ from MarinRobot.utils.ImageEditor.edit_2 import (  # pylint:disable=import-error
     sepia_mode,
     sticker,
 )
-from MarinRobot.utils.ImageEditor.edit_3 import (  # pylint:disable=import-error
+from YamatoRobot.utils.ImageEditor.edit_3 import (  # pylint:disable=import-error
     black_border,
     blue_border,
     green_border,
     red_border,
 )
-from MarinRobot.utils.ImageEditor.edit_4 import (  # pylint:disable=import-error
+from YamatoRobot.utils.ImageEditor.edit_4 import (  # pylint:disable=import-error
     inverted,
     removebg_plain,
     removebg_sticker,
@@ -43,7 +43,7 @@ from MarinRobot.utils.ImageEditor.edit_4 import (  # pylint:disable=import-error
     rotate_270,
     round_sticker,
 )
-from MarinRobot.utils.ImageEditor.edit_5 import (  # pylint:disable=import-error
+from YamatoRobot.utils.ImageEditor.edit_5 import (  # pylint:disable=import-error
     normalglitch_1,
     normalglitch_2,
     normalglitch_3,
