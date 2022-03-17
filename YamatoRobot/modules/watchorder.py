@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from pyrogram import filters
 
-from MarinRobot import BOT_USERNAME, pbot
+from YamatoRobot import BOT_USERNAME, pbot
 
 
 @pbot.on_message(filters.command("watchorder", f"watchorder@{BOT_USERNAME}"))
