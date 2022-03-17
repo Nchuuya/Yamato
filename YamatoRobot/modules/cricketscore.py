@@ -1,13 +1,10 @@
-# credits  @chsaiujwal @daisyxrobot
-# ported to masha @Mr_Dark_Prince
-
 import urllib.request
 
 from bs4 import BeautifulSoup
 from telethon import events
 from telethon.tl import functions, types
 
-from MarinRobot import telethn as tbot
+from YamatoRobot import telethn as tbot
 
 
 async def is_register_admin(chat, user):
