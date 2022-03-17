@@ -6,8 +6,8 @@ from telegram import Chat, ChatPermissions, Message, User
 from telegram.error import BadRequest, TelegramError
 from telegram.ext import CommandHandler, Filters, MessageHandler
 
-import MarinRobot.modules.sql.global_mutes_sql as sql
-from MarinRobot import (
+import YamatoRobot.modules.sql.global_mutes_sql as sql
+from YamatoRobot import (
     DEV_USERS,
     FAFNIRS,
     OWNER_ID,
@@ -16,10 +16,10 @@ from MarinRobot import (
     STRICT_GMUTE,
     dispatcher,
 )
-from MarinRobot.modules.helper_funcs.chat_status import is_user_admin, user_admin
-from MarinRobot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
-from MarinRobot.modules.helper_funcs.filters import CustomFilters
-from MarinRobot.modules.sql.users_sql import get_all_chats
+from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin, user_admin
+from YamatoRobot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
+from YamatoRobot.modules.helper_funcs.filters import CustomFilters
+from YamatoRobot.modules.sql.users_sql import get_all_chats
 
 GMUTE_ENFORCE_GROUP = 6
 
