@@ -6,7 +6,7 @@ from PIL import Image
 from telegram import Chat
 from telegram.ext import CommandHandler
 
-from MarinRobot import dispatcher
+from YamatoRobot import dispatcher
 
 
 def is_user_in_chat(chat: Chat, user_id: int) -> bool:
