@@ -5,9 +5,9 @@ import re
 from telethon import *
 from telethon.tl.types import *
 
-from MarinRobot import *
-from MarinRobot import ubot
-from MarinRobot.events import register
+from YamatoRobot import *
+from YamatoRobot import ubot
+from YamatoRobot.events import register
 
 EMOJI_PATTERN = re.compile(
     "["
