@@ -18,8 +18,8 @@ from telegram.error import BadRequest, TelegramError, Unauthorized
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 from telegram.utils.helpers import mention_html, mention_markdown
 
-import MarinRobot.modules.sql.feds_sql as sql
-from MarinRobot import (
+import YamatoRobot.modules.sql.feds_sql as sql
+from YamatoRobot import (
     EVENT_LOGS,
     FAFNIRS,
     LOGGER,
@@ -29,15 +29,15 @@ from MarinRobot import (
     SUPPORT_CHAT,
     dispatcher,
 )
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.alternate import send_message
-from MarinRobot.modules.helper_funcs.chat_status import is_user_admin
-from MarinRobot.modules.helper_funcs.extraction import (
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.alternate import send_message
+from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
+from YamatoRobot.modules.helper_funcs.extraction import (
     extract_unt_fedban,
     extract_user,
     extract_user_fban,
 )
-from MarinRobot.modules.helper_funcs.string_handling import markdown_parser
+from YamatoRobot.modules.helper_funcs.string_handling import markdown_parser
 
 # Hello bot owner, I spended for feds many hours of my life, Please don't remove this if you still respect MrYacha and peaktogoo and AyraHikari too
 # Federation by MrYacha 2018-2019
