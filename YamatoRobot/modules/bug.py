@@ -10,13 +10,13 @@ from pyrogram.types import (
     Message,
 )
 
-from MarinRobot import pbot as Client
-from MarinRobot import (
+from YamatoRobot import pbot as Client
+from YamatoRobot import (
     OWNER_ID as owner_id,
     OWNER_USERNAME as owner_usn,
     SUPPORT_CHAT as log,
 )
-from MarinRobot.utils.errors import capture_err
+from YamatoRobot.utils.errors import capture_err
 
 
 def content(msg: Message) -> [None, str]:
