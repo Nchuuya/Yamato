@@ -1,11 +1,11 @@
-# Module to get info about anime, characters, manga etc. by @TheRealPhoenix
+# Module to get info about anime, characters, manga etc.
 
 from jikanpy import Jikan
 from jikanpy.exceptions import APIException
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
 
-from MarinRobot import dispatcher
+from YamatoRobot import dispatcher
 
 jikan = Jikan()
 
