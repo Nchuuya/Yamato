@@ -3,9 +3,9 @@ import time
 from telegram import Bot, Update
 from telegram.ext import run_async
 
-from MarinRobot import dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.chat_status import user_admin
+from YamatoRobot import dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.chat_status import user_admin
 
 # sleep how many times after each edit in 'love'
 EDIT_SLEEP = 1
