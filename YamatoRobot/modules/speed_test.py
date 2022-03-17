@@ -2,9 +2,9 @@ import speedtest
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
-from MarinRobot import DEV_USERS, dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.chat_status import dev_plus
+from YamatoRobot import DEV_USERS, dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.chat_status import dev_plus
 
 
 def convert(speed):
