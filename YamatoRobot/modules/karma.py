@@ -3,9 +3,9 @@ import re
 
 from pyrogram import filters
 
-from MarinRobot import BOT_USERNAME
-from MarinRobot import pbot as app
-from MarinRobot.modules.mongo.karma_mongo import (
+from YamatoRobot import BOT_USERNAME
+from YamatoRobot import pbot as app
+from YamatoRobot.modules.mongo.karma_mongo import (
     alpha_to_int,
     get_karma,
     get_karmas,
@@ -15,8 +15,8 @@ from MarinRobot.modules.mongo.karma_mongo import (
     karma_on,
     update_karma,
 )
-from MarinRobot.utils.errors import capture_err
-from MarinRobot.utils.permission import adminsOnly
+from YamatoRobot.utils.errors import capture_err
+from YamatoRobot.utils.permission import adminsOnly
 
 karma_positive_group = 3
 karma_negative_group = 4
