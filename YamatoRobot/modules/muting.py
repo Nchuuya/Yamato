@@ -1,29 +1,3 @@
-"""
-MIT License
-
-Copyright (C) 2021 Unknown-san
-
-This file is part of @MarinRobot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import html
 import re
 from typing import Optional
@@ -43,8 +17,8 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 from telegram.utils.helpers import mention_html
 
-from MarinRobot import FAFNIRS, LOGGER, dispatcher
-from MarinRobot.modules.helper_funcs.chat_status import (
+from YamatoRobot import FAFNIRS, LOGGER, dispatcher
+from YamatoRobot.modules.helper_funcs.chat_status import (
     bot_admin,
     can_restrict,
     connection_status,
@@ -52,10 +26,10 @@ from MarinRobot.modules.helper_funcs.chat_status import (
     user_admin,
     user_admin_no_reply,
 )
-from MarinRobot.modules.helper_funcs.extraction import extract_user_and_text
-from MarinRobot.modules.helper_funcs.string_handling import extract_time
-from MarinRobot.modules.log_channel import loggable
-from MarinRobot.modules.redis.approvals_redis import is_approved
+from YamatoRobot.modules.helper_funcs.extraction import extract_user_and_text
+from YamatoRobot.modules.helper_funcs.string_handling import extract_time
+from YamatoRobot.modules.log_channel import loggable
+from YamatoRobot.modules.redis.approvals_redis import is_approved
 
 
 def check_user(user_id: int, bot: Bot, chat: Chat) -> Optional[str]:
