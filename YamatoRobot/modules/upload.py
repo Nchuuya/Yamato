@@ -7,9 +7,9 @@ import traceback
 import aiohttp
 from telethon import events
 
-from MarinRobot import telethn as bot
-from MarinRobot.modules.urluploader import download_file
-from MarinRobot.pyrogramee.pluginshelper import humanbytes, progress
+from YamatoRobot import telethn as bot
+from YamatoRobot.modules.urluploader import download_file
+from YamatoRobot.pyrogramee.pluginshelper import humanbytes, progress
 
 DOWNLOADPATH = "./MarinRobot/Downloads/"
 
