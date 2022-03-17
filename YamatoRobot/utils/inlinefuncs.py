@@ -22,22 +22,22 @@ from pyrogram.types import (CallbackQuery,
                             InputTextMessageContent)
 from search_engine_parser import GoogleSearch
 
-from MarinRobot import (
+from YamatoRobot import (
     DEV_USERS,
     EVENT_LOGS, 
     BOT_USERNAME,
     ubot2,
 )
-from MarinRobot import pbot as app 
-from MarinRobot import arq
-from MarinRobot.services.keyboard import Ikb
-from MarinRobot.utils.pluginhelper import convert_seconds_to_minutes as time_convert, fetch
-from MarinRobot.services.tasks import _get_tasks_text, all_tasks, rm_task
-from MarinRobot.services.types import InlineQueryResultCachedDocument
-from MarinRobot.modules.info import get_chat_info, get_user_info
-from MarinRobot.modules.music import download_youtube_audio
-from MarinRobot.utils.functions import test_speedtest
-from MarinRobot.utils.pastebin import paste
+from YamatoRobot import pbot as app 
+from YamatoRobot import arq
+from YamatoRobot.services.keyboard import Ikb
+from YamatoRobot.utils.pluginhelper import convert_seconds_to_minutes as time_convert, fetch
+from YamatoRobot.services.tasks import _get_tasks_text, all_tasks, rm_task
+from YamatoRobot.services.types import InlineQueryResultCachedDocument
+from YamatoRobot.modules.info import get_chat_info, get_user_info
+from YamatoRobot.modules.music import download_youtube_audio
+from YamatoRobot.utils.functions import test_speedtest
+from YamatoRobot.utils.pastebin import paste
 
 MESSAGE_DUMP_CHAT = EVENT_LOGS
 
@@ -102,7 +102,7 @@ async def inline_help_func(__HELP__):
             input_message_content=InputTextMessageContent(
                 "**__Click A Button To Get Started.__**"
             ),
-            thumb_url="https://telegra.ph/file/1b8f08dba704a5eb2bb09.jpg",
+            thumb_url="https://telegra.ph/file/00409644b0a6b670bc320.jpg",
             reply_markup=buttons,
         ),
     ]
@@ -135,7 +135,7 @@ async def alive_function(answers):
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://telegra.ph/file/be24bbabbe0ec30dff489.jpg",
+            thumb_url="https://telegra.ph/file/00409644b0a6b670bc320.jpg",
             input_message_content=InputTextMessageContent(
                 msg, disable_web_page_preview=True
             ),
