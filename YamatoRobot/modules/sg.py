@@ -1,9 +1,9 @@
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl import functions, types
 
-from MarinRobot import telethn as tbot
-from MarinRobot import ubot
-from MarinRobot.events import register as shasa
+from YamatoRobot import telethn as tbot
+from YamatoRobot import ubot
+from YamatoRobot.events import register as shasa
 
 
 async def is_register_admin(chat, user):
