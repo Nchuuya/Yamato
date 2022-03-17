@@ -1,8 +1,8 @@
 from pyrogram import filters
 from pyrogram.errors import RPCError
 
-from MarinRobot import pbot
-from MarinRobot.pyrogramee.pluginshelper import admins_only, get_text
+from YamatoRobot import pbot
+from YamatoRobot.pyrogramee.pluginshelper import admins_only, get_text
 
 
 @pbot.on_message(
