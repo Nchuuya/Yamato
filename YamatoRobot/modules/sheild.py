@@ -12,16 +12,16 @@ from pymongo import MongoClient
 from telethon import events
 from telethon.tl.types import ChatBannedRights
 
-from MarinRobot import BOT_ID, MONGO_DB_URL
-from MarinRobot import telethn as tbot
-from MarinRobot.conf import get_str_key
-from MarinRobot.events import register
-from MarinRobot.modules.sql.nsfw_watch_sql import (
+from YamatoRobot import BOT_ID, MONGO_DB_URL
+from YamatoRobot import telethn as tbot
+from YamatoRobot.conf import get_str_key
+from YamatoRobot.events import register
+from YamatoRobot.modules.sql.nsfw_watch_sql import (
     add_nsfwatch,
     is_nsfwatch_indb,
     rmnsfwatch,
 )
-from MarinRobot.pyrogramee.telethonbasics import is_admin
+from YamatoRobot.pyrogramee.telethonbasics import is_admin
 
 translator = google_translator()
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
