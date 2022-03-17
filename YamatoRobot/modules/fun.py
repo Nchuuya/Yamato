@@ -7,15 +7,15 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, Filters
 from telegram.utils.helpers import escape_markdown
 
-import MarinRobot.modules.fun_strings as fun_strings
-from MarinRobot import REDLIONS, SPRYZONS, dispatcher
-from MarinRobot.modules.disable import (
+import YamatoRobot.modules.fun_strings as fun_strings
+from YamatoRobot import REDLIONS, SPRYZONS, dispatcher
+from YamatoRobot.modules.disable import (
     DisableAbleCommandHandler,
     DisableAbleMessageHandler,
 )
-from MarinRobot.modules.helper_funcs.alternate import typing_action
-from MarinRobot.modules.helper_funcs.chat_status import is_user_admin
-from MarinRobot.modules.helper_funcs.extraction import extract_user
+from YamatoRobot.modules.helper_funcs.alternate import typing_action
+from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
+from YamatoRobot.modules.helper_funcs.extraction import extract_user
 
 GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
 
