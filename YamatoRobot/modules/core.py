@@ -1,11 +1,11 @@
 import asyncio
 import os
 
-from MarinRobot import OWNER_ID
-from MarinRobot import telethn as tbot
-from MarinRobot.events import register
+from YamatoRobot import OWNER_ID
+from YamatoRobot import telethn as tbot
+from YamatoRobot.events import register
 
-water = "./MarinRobot/resources/Shasa.jpg"
+water = "./YamatoRobot/resources/Yamato.jpg"
 client = tbot
 
 
@@ -18,7 +18,7 @@ async def Prof(event):
     thumb = water
     message_id = event.message.id
     input_str = event.pattern_match.group(1)
-    the_plugin_file = "./MarinRobot/modules/{}.py".format(input_str)
+    the_plugin_file = "./YamatoRobot/modules/{}.py".format(input_str)
     if os.path.exists(the_plugin_file):
         message_id = event.message.id
         await event.client.send_file(
@@ -35,7 +35,7 @@ async def Prof(event):
 
 from pathlib import Path
 
-from MarinRobot.events import load_module
+from YamatoRobot.events import load_module
 
 
 @register(pattern="^/install")
@@ -51,7 +51,7 @@ async def install(event):
             downloaded_file_name = (
                 await event.client.download_media(  # pylint:disable=E0602
                     await event.get_reply_message(),
-                    "MarinRobot/modules/",  # pylint:disable=E0602
+                    "YamatoRoBot/modules/",  # pylint:disable=E0602
                 )
             )
             if "(" not in downloaded_file_name:
