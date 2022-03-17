@@ -8,8 +8,8 @@ from telegram.error import BadRequest, TelegramError, Unauthorized
 from telegram.ext import CallbackContext, CommandHandler, Filters, MessageHandler
 from telegram.utils.helpers import mention_html
 
-import MarinRobot.modules.sql.global_bans_sql as sql
-from MarinRobot import (
+import YamatoRobot.modules.sql.global_bans_sql as sql
+from YamatoRobot import (
     DEV_USERS,
     EVENT_LOGS,
     FAFNIRS,
@@ -23,14 +23,14 @@ from MarinRobot import (
     dispatcher,
     sw,
 )
-from MarinRobot.modules.helper_funcs.chat_status import (
+from YamatoRobot.modules.helper_funcs.chat_status import (
     is_user_admin,
     support_plus,
     user_admin,
 )
-from MarinRobot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
-from MarinRobot.modules.helper_funcs.misc import send_to_list
-from MarinRobot.modules.sql.users_sql import get_user_com_chats
+from YamatoRobot.modules.helper_funcs.extraction import extract_user, extract_user_and_text
+from YamatoRobot.modules.helper_funcs.misc import send_to_list
+from YamatoRobot.modules.sql.users_sql import get_user_com_chats
 
 GBAN_ENFORCE_GROUP = 6
 
