@@ -3,7 +3,7 @@ MIT License
 
 Copyright (C) 2021 Unknown-san
 
-This file is part of @MarinRobot (Telegram Bot)
+This file is part of @YamatoRobot (Telegram Bot)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ SOFTWARE.
 
 from sqlalchemy import Column, Numeric, String
 
-from MarinRobot.modules.sql import BASE, SESSION
+from YamatoRobot.modules.sql import BASE, SESSION
 
 
 class forceSubscribe(BASE):
