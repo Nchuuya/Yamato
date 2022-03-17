@@ -5,11 +5,11 @@ from telegram import TelegramError
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, Filters
 
-import MarinRobot.modules.sql.users_sql as sql
-from MarinRobot import LOGGER, OWNER_ID, dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.chat_status import user_admin
-from MarinRobot.modules.helper_funcs.filters import CustomFilters
+import YamatoRobot.modules.sql.users_sql as sql
+from YamatoRobot import LOGGER, OWNER_ID, dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.chat_status import user_admin
+from YamatoRobot.modules.helper_funcs.filters import CustomFilters
 
 USERS_GROUP = 4
 
