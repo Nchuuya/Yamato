@@ -4,9 +4,9 @@ from telethon import events
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
-from MarinRobot import DEV_USERS, EVENT_LOGS, OWNER_ID
-from MarinRobot import mongodb as db
-from MarinRobot import telethn as tbot
+from YamatoRobot import DEV_USERS, EVENT_LOGS, OWNER_ID
+from YamatoRobot import mongodb as db
+from YamatoRobot import telethn as tbot
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
