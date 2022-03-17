@@ -15,8 +15,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from zalgo_text import zalgo
 
-from MarinRobot import telethn, ubot
-from MarinRobot.events import register
+from YamatoRobot import telethn, ubot
+from YamatoRobot.events import register
 
 nltk.download("punkt")
 nltk.download("averaged_perceptron_tagger")
