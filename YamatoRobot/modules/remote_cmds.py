@@ -2,15 +2,15 @@ from telegram import ChatPermissions, Update
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler
 
-from MarinRobot import dispatcher
-from MarinRobot.modules.helper_funcs.chat_status import (
+from YamatoRobot import dispatcher
+from YamatoRobot.modules.helper_funcs.chat_status import (
     bot_admin,
     is_bot_admin,
     is_user_ban_protected,
     is_user_in_chat,
 )
-from MarinRobot.modules.helper_funcs.extraction import extract_user_and_text
-from MarinRobot.modules.helper_funcs.filters import CustomFilters
+from YamatoRobot.modules.helper_funcs.extraction import extract_user_and_text
+from YamatoRobot.modules.helper_funcs.filters import CustomFilters
 
 RBAN_ERRORS = {
     "User is an administrator of the chat",
