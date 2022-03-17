@@ -29,7 +29,7 @@ from functools import wraps
 
 from telegram.ext import CallbackContext
 
-from MarinRobot.modules.helper_funcs.misc import is_module_loaded
+from YamatoRobot.modules.helper_funcs.misc import is_module_loaded
 
 FILENAME = __name__.rsplit(".", 1)[-1]
 
@@ -39,9 +39,9 @@ if is_module_loaded(FILENAME):
     from telegram.ext import CommandHandler, JobQueue
     from telegram.utils.helpers import escape_markdown
 
-    from MarinRobot import EVENT_LOGS, LOGGER, dispatcher
-    from MarinRobot.modules.helper_funcs.chat_status import user_admin
-    from MarinRobot.modules.sql import log_channel_sql as sql
+    from YamatoRobot import EVENT_LOGS, LOGGER, dispatcher
+    from YamatoRobot.modules.helper_funcs.chat_status import user_admin
+    from YamatoRobot.modules.sql import log_channel_sql as sql
 
     def loggable(func):
         @wraps(func)
