@@ -5,9 +5,9 @@ import requests
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
 
-from MarinRobot import StartTime, dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
-from MarinRobot.modules.helper_funcs.chat_status import sudo_plus
+from YamatoRobot import StartTime, dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.chat_status import sudo_plus
 
 sites_list = {
     "Telegram": "https://api.telegram.org",
