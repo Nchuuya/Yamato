@@ -1,39 +1,13 @@
-"""
-MIT License
-
-Copyright (C) 2021 Unknown-san
-
-This file is part of @MarinRobot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 from time import sleep
 
 from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 
-import MarinRobot.modules.sql.global_bans_sql as gban_sql
-import MarinRobot.modules.sql.users_sql as user_sql
-from MarinRobot import DEV_USERS, OWNER_ID, dispatcher
-from MarinRobot.modules.helper_funcs.chat_status import dev_plus
+import YamatoRobot.modules.sql.global_bans_sql as gban_sql
+import YamatoRobot.modules.sql.users_sql as user_sql
+from YamatoRobot import DEV_USERS, OWNER_ID, dispatcher
+from YamatoRobot.modules.helper_funcs.chat_status import dev_plus
 
 
 def get_muted_chats(bot: Bot, update: Update, leave: bool = False):
