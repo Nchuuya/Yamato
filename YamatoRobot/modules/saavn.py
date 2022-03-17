@@ -4,8 +4,8 @@ import requests
 import wget
 from pyrogram import filters
 
-from MarinRobot import pbot
-from MarinRobot.pyrogramee.dark import get_arg
+from YamatoRobot import pbot
+from YamatoRobot.pyrogramee.dark import get_arg
 
 
 @pbot.on_message(filters.command("saavn"))
