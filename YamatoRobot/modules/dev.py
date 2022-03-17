@@ -8,9 +8,9 @@ from telegram import TelegramError, Update
 from telegram.error import Unauthorized
 from telegram.ext import CallbackContext, CommandHandler
 
-import MarinRobot
-from MarinRobot import dispatcher
-from MarinRobot.modules.helper_funcs.chat_status import dev_plus
+import YamatoRobot
+from YamatoRobot import dispatcher
+from YamatoRobot.modules.helper_funcs.chat_status import dev_plus
 
 
 @dev_plus
