@@ -3,8 +3,8 @@ import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
 
-from MarinRobot import telethn as bot
-from MarinRobot.events import register
+from YamatoRobot import telethn as bot
+from YamatoRobot.events import register
 
 
 @register(pattern="^/mmf ?(.*)")
