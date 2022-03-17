@@ -5,9 +5,9 @@ from traceback import format_exc
 from pyrogram import filters
 from pyrogram.types import Message
 
-from MarinRobot import arq
-from MarinRobot.utils.errors import capture_err
-from MarinRobot import pbot as app
+from YamatoRobot import arq
+from YamatoRobot.utils.errors import capture_err
+from YamatoRobot import pbot as app
 
 
 async def quotify(messages: list):
