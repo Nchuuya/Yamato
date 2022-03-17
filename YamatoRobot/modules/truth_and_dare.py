@@ -3,9 +3,9 @@ import random
 from telegram import Update
 from telegram.ext import CallbackContext
 
-import MarinRobot.modules.truth_and_dare_string as truth_and_dare_string
-from MarinRobot import dispatcher
-from MarinRobot.modules.disable import DisableAbleCommandHandler
+import YamatoRobot.modules.truth_and_dare_string as truth_and_dare_string
+from YamatoRobot import dispatcher
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
 
 
 def truth(update: Update, context: CallbackContext):
