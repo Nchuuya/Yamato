@@ -17,11 +17,11 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import mention_html
 
-import MarinRobot.modules.sql.chatbot_sql as sql
-from MarinRobot import AI_API_KEY, dispatcher
-from MarinRobot.modules.helper_funcs.chat_status import user_admin
-from MarinRobot.modules.helper_funcs.filters import CustomFilters
-from MarinRobot.modules.log_channel import gloggable
+import YamatoRobot.modules.sql.chatbot_sql as sql
+from YamatoRobot import AI_API_KEY, dispatcher
+from YamatoRobot.modules.helper_funcs.chat_status import user_admin
+from YamatoRobot.modules.helper_funcs.filters import CustomFilters
+from YamatoRobot.modules.log_channel import gloggable
 
 CoffeeHouseAPI = API(AI_API_KEY)
 api_client = LydiaAI(CoffeeHouseAPI)
