@@ -1,7 +1,7 @@
 import os
 
-from MarinRobot.events import register
-from MarinRobot import telethn as Client
+from YamatoRobot.events import register
+from YamatoRobot import telethn as Client
 from telethon import events, Button, types
 
 TMP_DOWNLOAD_DIRECTORY = "./"
@@ -11,7 +11,7 @@ from datetime import datetime
 from telegraph import Telegraph, upload_file, exceptions
 
 
-wibu = "NezukoXRobot"
+wibu = "YamatoXRoBot"
 telegraph = Telegraph()
 data = telegraph.create_account(short_name=wibu)
 auth_url = data["auth_url"]
