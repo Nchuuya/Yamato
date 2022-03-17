@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, String
 
-from MarinRobot.modules.sql import BASE, SESSION  # import your file name
+from YamatoRobot.modules.sql import BASE, SESSION  # import your file name
 
 
 class VanitasUser(BASE):
