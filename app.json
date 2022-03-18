@@ -1,5 +1,5 @@
 {
-      "name": "Shasa Bot",
+      "name": "Yamato Bot",
       "description": "An Anime Theme Telegram group management bot.",
       "keywords": [
          "telegram",
@@ -9,8 +9,8 @@
          "Shasa"
       ],
     
-   "logo":    "https://telegra.ph/file/c3254e92e7672b773f942.jpg",  
-   "repository": "https://github.com/Mdnoor786/MarinRobot",
+   "logo":    "https://telegra.ph/file/00409644b0a6b670bc320.jpg",  
+   "repository": "https://github.com/Nchuuya/YamatoRobot",
    "addons": [
           {
          "options": {
