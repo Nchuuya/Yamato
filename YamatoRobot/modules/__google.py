@@ -96,7 +96,7 @@ async def okgoogle(img):
         return
 
     if photo:
-        dev = await img.reply("`Processing...`")
+        dev = await img.reply("`ara ara matte!...`")
         try:
             image = Image.open(photo)
         except OSError:
