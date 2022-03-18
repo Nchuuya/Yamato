@@ -65,11 +65,11 @@ RUN apt update && apt upgrade -y && \
 RUN pip3 install --upgrade pip setuptools
 
 # Copy Python Requirements to /root/YamatoRobot
-RUN git clone -b shiken https://github.com/Nchuuya/YamatoRobot /root/YamatoRobot
+RUN git clone -b shiken https://github.com/Nchuuya/Yamato/root/YamatoRobot
 WORKDIR /root/YamatoRobot
 
 #Copy config file to /root/YamatoRobot/YamatoRobot
-COPY ./YamatoRobot/sample_config.py ./YamatoRobot/config.py* /root/MarinRobot/MarinRobot/
+COPY ./YamatoRobot/sample_config.py ./YamatoRobot/config.py* /root/YamatoRobot/YamatoRobot/
 
 ENV PATH="/home/bot/bin:$PATH"
 
