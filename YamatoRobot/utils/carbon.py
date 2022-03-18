@@ -26,7 +26,7 @@ SOFTWARE.
 
 from io import BytesIO
 
-from MarinRobot import aiohttpsession
+from YamatoRobot import aiohttpsession
 
 
 async def make_carbon(code):
