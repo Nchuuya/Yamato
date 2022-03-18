@@ -16,7 +16,7 @@ from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 
 import YamatoRobot.modules.sql.userinfo_sql as sql
-from MarinRobot import (
+from YamatoRobot import (
     DEV_USERS,
     FAFNIRS,
     INFOPIC,
