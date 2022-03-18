@@ -134,7 +134,7 @@ if ENV:
         raise Exception("Your blacklisted chats list does not contain valid integers.")
 
 else:
-    from MarinRobot.config import Development as Config
+    from YamatoRobot.config import Development as Config
 
     TOKEN = Config.TOKEN
 
