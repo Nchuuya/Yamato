@@ -1,4 +1,4 @@
-from MarinRobot import mongodb as db_x
+from YamatoRobot import mongodb as db_x
 
 lydia = db_x["CAHTBOT"]
 
