@@ -23,8 +23,7 @@ from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
 import YamatoRobot.modules.sql.users_sql as sql
-from 
-YamatoRobot import (
+from YamatoRobot import (
     BOT_NAME,
     BOT_USERNAME,
     CERT_PATH,
