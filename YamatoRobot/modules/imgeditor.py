@@ -9,7 +9,7 @@ from pyrogram.types import (
 from YamatoRobot import pbot as Client
 
 # By @TroJanzHEX
-from MarinRobot.utils.ImageEditor.edit_1 import (  # pylint:disable=import-error
+from YamatoRobot.utils.ImageEditor.edit_1 import (  # pylint:disable=import-error
     black_white,
     box_blur,
     bright,
