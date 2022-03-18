@@ -431,6 +431,6 @@ def connection_status(func):
     return connected_status
 
 
-from MarinRobot.modules import connection
+from YamatoRobot.modules import connection
 
 connected = connection.connected
