@@ -11,7 +11,7 @@ from YamatoRobot import telethn as bot
 from YamatoRobot.modules.urluploader import download_file
 from YamatoRobot.pyrogramee.pluginshelper import humanbytes, progress
 
-DOWNLOADPATH = "./MarinRobot/Downloads/"
+DOWNLOADPATH = "./YamatoRobot/Downloads/"
 
 
 def get_date_in_two_weeks():
@@ -85,7 +85,7 @@ async def tsh(event):
 
             str(time.time() - start)
             await orta.edit(
-                f"File Successfully Uploaded to TransferSh.\n\nLink 👉 {download_link}\nExpired Date 👉 {final_date}\n\nUploaded by *Cutiepii Robot*"
+                f"File Successfully Uploaded to TransferSh.\n\nLink 👉 {download_link}\nExpired Date 👉 {final_date}\n\nUploaded by *YamatoRobot*"
             )
         except Exception as e:
             traceback.print_exc()
@@ -161,7 +161,7 @@ async def up(event):
                 event.chat.id,
                 dosya,
                 force_document=True,
-                caption="Uploaded By *AsunaRobot*",
+                caption="Uploaded By *YamatoRobot*",
             )
         except Exception as e:
             traceback.print_exc()
