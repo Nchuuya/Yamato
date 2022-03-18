@@ -30,7 +30,7 @@ MONGO_DB_URL = get_str_key("MONGO_DB_URL")
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URL)
-db = client["MarinRobot"]
+db = client["YamatoRobot"]
 
 
 async def is_nsfw(event):
