@@ -2,7 +2,7 @@ import flag
 from countryinfo import CountryInfo
 
 from YamatoRobot import pbot as borg
-from YamatoRobot import register
+from YamatoRobot.events import register
 
 
 @register(pattern="^/country (.*)")
