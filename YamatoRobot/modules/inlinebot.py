@@ -1,8 +1,8 @@
 import traceback
 
-from MarinRobot import pbot as app
-from MarinRobot.utils.pluginhelp import fetch
-from MarinRobot.utils.inlinefuncs import *
+from YamatoRobot import pbot as app
+from YamatoRobot.utils.pluginhelp import fetch
+from YamatoRobot.utils.inlinefuncs import *
 
 __MODULE__ = "Inline"
 __HELP__ = """See inline for help related to inline"""
