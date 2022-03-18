@@ -6,7 +6,7 @@ import aiofiles
 import aiohttp
 from pyrogram import filters
 
-from MarinRobot import pbot as LYCIA
+from YamatoRobot import pbot as LYCIA
 
 
 async def fetch(url):
