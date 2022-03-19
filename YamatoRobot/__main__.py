@@ -81,7 +81,7 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """
 *Hello {} !*
-✪ I'm Yamato Hentai-theme management bot [✨](https://telegra.ph/file/88263492876f6c2d5b995.jpg)
+✪ I'm Yamato Hentai-theme management bot [✨](https://telegra.ph/file/00409644b0a6b670bc320.jpg)
 ────────────────────────
 × *Uptime:* `{}`
 × `{}` *users, across* `{}` *chats.*
@@ -101,7 +101,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-            text="➗ Add Yamato To Your Group ➗", url=f"t.me/{bu}?startgroup=new"),
+            text="➗ Add Yamato To Your Group ➗", url=f"t.me/{}?startgroup=new"),
     ],
 ]
 
