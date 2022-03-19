@@ -83,7 +83,7 @@ HELP_MSG = "Click the button below to get help manu in your pm."
 START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
-────「 [{}](https://telegra.ph/file/ae41ca22aaff27dfb50cc.jpg) 」────
+────「 [{}](https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg) 」────
 ʜᴇʏᴏ! ᴡᴀᴛᴀꜱʜɪ ᴡᴀ ɴᴏ ʏᴀᴍᴀᴛᴏ ᴅᴇꜱᴜ ᴋᴀ ɪ ᴍ ʜᴇʀᴇ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ✓• *Uptime:* `{}`
@@ -115,7 +115,7 @@ buttons = [
 
 
 HELP_STRINGS = """
-Hey there! Myself [Yamato](https://telegra.ph/file/c3f91b87fa65cd83f306d.jpg).
+Hey there! Myself [Yamato](https://telegra.ph/file/00409644b0a6b670bc320.jpg).
 I'm a Queen For Fun and help admins manage their groups ! Have a look at the following for an idea of some of the things I can help you with.
 
 *Main* commands available:
@@ -409,7 +409,7 @@ def shasa_callback_data(update, context):
         ❍ 🤍[Suppσrt](https://t.me/BoaHancock_Support)🤍
         ❍ 💚[LionZUb](https://t.me/BoaHancock_Support)💚
         ❍ ❤️[ChatGrp](https://t.me/straydogs)❤️
-        ✨[Vc Player Help](https://telegra.ph/Shasa-Music-08-15)✨""",
+        ✨[Vc Player Help](https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg)✨""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -813,7 +813,7 @@ def main():
             LOGGER.warning(e.message)
 
     test_handler = DisableAbleCommandHandler("test", test, run_async=True)
-    start_handler = DisableAbleCommandHandler("start", start, run_async=True)
+    start_handler = DisableAbleCommandHandler("hstart", start, run_async=True)
 
     help_handler = DisableAbleCommandHandler("help", get_help, run_async=True)
     help_callback_handler = CallbackQueryHandler(
