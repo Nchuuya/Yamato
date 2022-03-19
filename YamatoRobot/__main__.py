@@ -174,8 +174,6 @@ for module_name in ALL_MODULES:
     if hasattr(imported_module, "__user_settings__"):
         USER_SETTINGS[imported_module.__mod_name__.lower()] = imported_module
 
-GROUP_START_IMG ="https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg"
-
 
 # do not async
 def send_help(chat_id, text, keyboard=None):
