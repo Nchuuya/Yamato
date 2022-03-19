@@ -51,7 +51,7 @@ from YamatoRobot.modules.helper_funcs.alternate import typing_action
 from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
 from YamatoRobot.modules.helper_funcs.misc import paginate_modules
 
-HELP_IMG = ""
+HELP_IMG = "https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
