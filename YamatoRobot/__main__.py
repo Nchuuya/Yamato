@@ -1,3 +1,29 @@
+"""
+MIT License
+
+Copyright (C) 2021 MdNoor786
+
+This file is part of @Shasa_RoBot (Telegram Bot)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
 import html
 import importlib
 import json
@@ -7,6 +33,7 @@ import time
 import traceback
 from sys import argv
 from typing import Optional
+
 from pyrogram import idle
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import (
@@ -21,12 +48,13 @@ from telegram.ext import CallbackContext, CallbackQueryHandler, Filters, Message
 from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
-import YamatoRobot.modules.sql.users_sql as sql
-from YamatoRobot import (
+import ShasaBot.modules.sql.users_sql as sql
+from ShasaBot import (
     BOT_NAME,
     BOT_USERNAME,
     CERT_PATH,
     DONATION_LINK,
+    GROUP_START_IMG,
     HELP_IMG,
     LOGGER,
     OWNER_ID,
@@ -45,13 +73,12 @@ from YamatoRobot import (
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from YamatoRobot.modules import ALL_MODULES
-from YamatoRobot.modules.disable import DisableAbleCommandHandler
-from YamatoRobot.modules.helper_funcs.alternate import typing_action
-from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
-from YamatoRobot.modules.helper_funcs.misc import paginate_modules
+from ShasaBot.modules import ALL_MODULES
+from ShasaBot.modules.disable import DisableAbleCommandHandler
+from ShasaBot.modules.helper_funcs.alternate import typing_action
+from ShasaBot.modules.helper_funcs.chat_status import is_user_admin
+from ShasaBot.modules.helper_funcs.misc import paginate_modules
 
-HELP_IMG = "https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -70,7 +97,7 @@ def get_readable_time(seconds: int) -> str:
     for x in range(len(time_list)):
         time_list[x] = str(time_list[x]) + time_suffix_list[x]
     if len(time_list) == 4:
-        ping_time += time_list.pop() + ", "
+        ping_time += f"{time_list.pop()}, "
 
     time_list.reverse()
     ping_time += ":".join(time_list)
@@ -82,21 +109,18 @@ HELP_MSG = "Click the button below to get help manu in your pm."
 START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
-────「 [{}](https://telegra.ph/file/b3bacde666d6c107b16e6.jpg) 」────
-ʜᴇʏᴏ! ᴡᴀᴛᴀꜱʜɪ ᴡᴀ ɴᴏ ʏᴀᴍᴀᴛᴏ ᴅᴇꜱᴜ ᴋᴀ 
-ɪ ᴍ ʜᴇʀᴇ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ
-ʙᴜᴛ ɪ ᴍɪꜱꜱ ᴍʏ ᴏᴅᴇɴ ꜱᴀᴍᴀ ꜱᴏ ɢɪᴠᴇ ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ
+────「 [{}](https://telegra.ph/file/ae41ca22aaff27dfb50cc.jpg) 」────
+*ʜᴇʏ! {},*
+*ɪ ᴀᴍ 𝐒𝐡𝐚𝐬𝐚 ᴀɴ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ᴀᴅᴠᴀɴᴄᴇ ɢʀᴏᴜᴏ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ᴡɪᴛʜ ᴀ ʟᴏᴛ ᴏғ sᴘᴇᴄɪᴀʟɪᴛʏ.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-This is Hentai Yamato Bot With 
-Music Support Yuuki 3.0✨
+✓• *Uptime:* `{}`
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-➛ type /help
+➛ᴛʀʏ ᴛʜᴇ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴛᴏ ᴋɴᴏᴡ ᴍʏ ᴀʙɪʟɪᴛɪᴇs ××
 """
 
 GROUP_START_TEXT = """
-────「 [{}](https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg)
-ℍ𝕖𝕪𝕠! 𝕎𝕒𝕥𝕒𝕤𝕙𝕚 𝕨𝕒 𝕟𝕠 𝕪𝕒𝕞𝕒𝕥𝕠 𝕕𝕖𝕤𝕦 𝕜𝕒 
-𝕀 𝕞 𝕙𝕖𝕣𝕖 𝕥𝕠 𝕞𝕒𝕟𝕒𝕘𝕖 𝕪𝕠𝕦𝕣 𝕘𝕣𝕠𝕦𝕡 {}
+I'm awake already!
+Haven't slept since: {}
 """
 
 buttons = [
@@ -107,23 +131,26 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="My Haki Powers", callback_data="marin_basichelp"),
-        InlineKeyboardButton(text="Updates", url="https://t.me/boa_updates"),
+        InlineKeyboardButton(text="ɪɴғᴏ", callback_data="shasa_basichelp"),
+        InlineKeyboardButton(text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""),
     ],
     [
-        InlineKeyboardButton(text="My Devil Fruit Powers:", callback_data="help_back"),
+        InlineKeyboardButton(text="ʜᴇʟᴘ", callback_data="help_back"),
     ],
 ]
 
 
 HELP_STRINGS = """
-Hey there! Myself [Yamato](https://telegra.ph/file/ca0ceefafdf5a3188d875.jpg).
-    /help: PM's you this message.
-    /bug <error name> : inform support about that error 
-    /donate: information on how to donate!
-    /settings: 
-   ❤️ in PM: will send you your settings for all supported modules.
-   💜 in a group: will redirect you to pm, with all that chat's settings.
+Hey there! Myself [𝐒𝐡𝐚𝐬𝐚](https://telegra.ph/file/c3f91b87fa65cd83f306d.jpg).
+I'm a Queen For Fun and help admins manage their groups ! Have a look at the following for an idea of some of the things I can help you with.
+
+*Main* commands available:
+ ➛ /help: PM's you this message.
+ ➛ /help <module name>: PM's you info about that module.
+ ➛ /donate: information on how to donate!
+ ➛ /settings:
+   ❂ in PM: will send you your settings for all supported modules.
+   ❂ in a group: will redirect you to pm, with all that chat's settings.
 """
 
 DONATE_STRING = """❂ I'm Free for Everyone ❂"""
@@ -140,7 +167,7 @@ CHAT_SETTINGS = {}
 USER_SETTINGS = {}
 
 for module_name in ALL_MODULES:
-    imported_module = importlib.import_module("YamatoRobot.modules." + module_name)
+    imported_module = importlib.import_module("ShasaBot.modules." + module_name)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
 
@@ -213,12 +240,13 @@ def start(update: Update, context: CallbackContext):
                         [
                             [
                                 InlineKeyboardButton(
-                                    text="[♡B𝚊𝚌k♡]", callback_data="help_back"
+                                    text="[•༶B𝚊𝚌k༶•]", callback_data="help_back"
                                 )
                             ]
                         ]
                     ),
                 )
+
             elif args[0].lower().startswith("stngs_"):
                 match = re.match("stngs_(.*)", args[0].lower())
                 chat = dispatcher.bot.getChat(match.group(1))
@@ -248,7 +276,7 @@ def start(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_animation(
             GROUP_START_IMG,
-            caption="<code> Yamato is Here For You\nI am Awake Since</code>: <code>{}</code>[https://telegra.ph/file/eaa3c5ab68c2927038f16.jpg]".format(
+            caption="<code>Shasa is Here For You💜\nI am Awake Since</code>: <code>{}</code>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
@@ -256,19 +284,13 @@ def start(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Support", url=f"https://t.me/BoaHancock_Support"
+                            text="sᴜᴘᴘᴏʀᴛ", url=f"https://telegram.dog/{SUPPORT_CHAT}"
                         )
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Updates",
-                            url="https://t.me/boa_updates",
-                        )
-                    ],
-                                        [
-                        InlineKeyboardButton(
-                            text="AOGIRI UNION",
-                            url="https://telegram.dog/AogiriNetwork",
+                            text="ᴜᴘᴅᴀᴛᴇs",
+                            url="https://telegram.dog/LionXupdates",
                         )
                     ],
                 ]
@@ -355,10 +377,10 @@ def help_button(update, context):
                     [
                         [
                             InlineKeyboardButton(
-                                text="【♡Bᴀᴄᴋ♡】", callback_data="help_back"
+                                text="【༶Back༶】", callback_data="help_back"
                             ),
                             InlineKeyboardButton(
-                                text="【♡Hᴏᴍᴇ♡】", callback_data="marin_back"
+                                text="【༶Home༶】", callback_data="shasa_back"
                             ),
                         ]
                     ]
@@ -402,30 +424,30 @@ def help_button(update, context):
         pass
 
 
-def marin_callback_data(update, context):
+def shasa_callback_data(update, context):
     query = update.callback_query
     uptime = get_readable_time((time.time() - StartTime))
-    if query.data == "marin_":
+    if query.data == "shasa_":
         query.message.edit_text(
-            text="""
-        ❍[Owner](https://t.me/zerohisoka)💜
-        ❍[Updates](https://t.me/BoaHancock_Support)🧡
-        ❍[Suppσrt](https://t.me/BoaHancock_Support)🤍
-        ❍[Suppσrt](https://t.me/BoaHancock_Support)💚
-        ❍ [ChatGrp](https://t.me/straydogs)❤️
-        ✨[Vc Player Help](https://telegra.ph/file/357e3aa3d58f17e81cb81.jpg)✨""",
+            text="""ℹ️ ι'м *ѕнαѕα*, α ρσωєяfυℓ gяσυρ мαиαgємєит вσт вυιℓт тσ нєℓρ уσυ мαиαgє уσυя gяσυρ єαѕιℓу.
+        ❍ 💜[Owner](https://t.me/Simpleboy786)💜
+        ❍ 🧡[Updates](https://t.me/Shasa_News)🧡
+        ❍ 🤍[Suppσrt](https://t.me/joinchat/P8HIdXOL8V9iNjRh)🤍
+        ❍ 💚[LionZUb](https://t.me/LionXSupport)💚
+        ❍ ❤️[ChatGrp](https://t.me/TotalNadaniya)❤️
+        ✨[Vc Player Help](https://telegra.ph/Shasa-Music-08-15)✨""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="♡Bᴀᴄᴋ♡", callback_data="marin_back")]]
+                [[InlineKeyboardButton(text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_back")]]
             ),
         )
-    elif query.data == "marin_basichelp":
+    elif query.data == "shasa_basichelp":
         query.message.edit_text(
             text=f"*Here's basic Help regarding* *How to use Me?*"
             f"\n\n• Firstly Add {dispatcher.bot.first_name} to your group by pressing [here](http://t.me/{dispatcher.bot.username}?startgroup=true)\n"
             f"\n• After adding promote me manually with full rights for faster experience.\n"
-            f"\n• Than send `/admincache@YamatoRobot` in that chat to refresh admin list in My database.\n"
+            f"\n• Than send `/admincache@Shasa_RoBot` in that chat to refresh admin list in My database.\n"
             f"\n\n*All done now use below given button's to know about use!*\n"
             f"",
             parse_mode=ParseMode.MARKDOWN,
@@ -433,123 +455,114 @@ def marin_callback_data(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="Admins", callback_data="marin_admin"),
-                        InlineKeyboardButton(text="Notes", callback_data="marin_notes"),
+                        InlineKeyboardButton(text="ᴀᴅᴍɪɴ", callback_data="shasa_admin"),
+                        InlineKeyboardButton(text="ɴᴏᴛᴇs", callback_data="shasa_notes"),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="Support", callback_data="YamatoSupport"
+                            text="sᴜᴘᴘᴏʀᴛ", callback_data="shasa_support"
                         ),
                         InlineKeyboardButton(
-                            text="Credits", callback_data="marin_credits"
+                            text="ᴄʀᴇᴅɪᴛ", callback_data="shasa_credit"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="♡Back♡", callback_data="marin_back"
+                            text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_back"
                         ),
                     ],
                 ]
             ),
         )
-    elif query.data == "marin_admin":
+    elif query.data == "shasa_admin":
         query.message.edit_text(
-            text=f"*Let's make your group bit effective now*"
-            f"\nCongragulations, Yamato now ready to manage your group."
-            f"\n\n*Admin Tools*"
-            f"\nBasic Admin tools help you to protect and powerup your group."
-            f"\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
-            f"\n\n*Welcome*"
-            f"\nLets set a welcome message to welcome new users coming to your group."
-            f"send `/setwelcome [message]` to set a welcome message!",
+            text="*Let's make your group bit effective now*",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                            text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_basichelp"
                         )
                     ]
                 ]
             ),
         )
 
-    elif query.data == "marin_notes":
+    elif query.data == "shasa_notes":
         query.message.edit_text(
-            text=f"<b> Setting up notes</b>"
-            f"\nYou can save message/media/audio or anything as notes"
-            f"\nto get a note simply use # at the beginning of a word"
-            f"\n\nYou can also set buttons for notes and filters (refer help menu)",
+            text="<b> Setting up notes</b>",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                            text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_basichelp"
                         )
                     ]
                 ]
             ),
         )
-    elif query.data == "Nobarasupport":
+
+    elif query.data == "shasa_support":
         query.message.edit_text(
-            text="* Marin support chats*" "\nJoin Support Group/Channel",
+            text="* Shasa support chats*" "\nJoin Support Group/Channel",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", url="t.me/NobaraSupport"),
+                        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", url="t.me/Shasa_News"),
                         InlineKeyboardButton(
-                            text="ᴠᴄ ʜᴇʟᴘ", url="https://telegra.ph/file/bc78aaf26976f892d6478.jpg"
+                            text="ᴠᴄ ʜᴇʟᴘ", url="https://telegra.ph/Shasa-Music-08-15"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/NobaraSupport"
+                            text="sᴜᴘᴘᴏʀᴛ", url=f"https://telegram.dog/{SUPPORT_CHAT}"
                         ),
                         InlineKeyboardButton(
-                            text="ᴜᴘᴅᴀᴛᴇs", url="https://t.me/NobaraSupport"
+                            text="ᴜᴘᴅᴀᴛᴇs", url="https://t.me/LionXupdates"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                            text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_basichelp"
                         ),
                     ],
                 ]
             ),
         )
-    elif query.data == "marin_credits":
+    elif query.data == "shasa_credit":
         query.message.edit_text(
-            text=f"<b>Marin Riders</b>\n"
-            f"\nHere Some Developers Helping in Making The Marin",
+            text="<b> SHASA DEV'S</b>\\n",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url="t.me/Xtheanonymous"),
+                        InlineKeyboardButton(text="ᴅᴇᴠ", url="t.me/simpleboy786"),
                         InlineKeyboardButton(
-                            text="ɢɪᴛʜᴜʙ", url="https://github.com/Unknown-san"
+                            text="ɢɪᴛʜᴜʙ", url="https://github.com/MdNoor786"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴅᴇᴠ", url="https://t.me/Xtheanonymous"
+                            text="ᴅᴇᴠ²", url="https://t.me/Copyless786"
                         ),
                         InlineKeyboardButton(
-                            text="ꜱᴜᴅᴏ", url="https://t.me/NobaraSupport"
+                            text="ʀᴇᴅʟɪᴏɴ", url="https://t.me/Shasa_News/12"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="♡Bᴀᴄᴋ♡", callback_data="marin_basichelp"
+                            text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_basichelp"
                         ),
                     ],
                 ]
             ),
         )
-    elif query.data == "marin_back":
+
+    elif query.data == "shasa_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(
@@ -582,12 +595,13 @@ def get_help(update, context):
                     [
                         InlineKeyboardButton(
                             text="Open In Private Chat",
-                            url="t.me/{}?start=help".format(context.bot.username),
+                            url=f"t.me/{context.bot.username}?start=help",
                         )
                     ]
                 ]
             ),
         )
+
         return
 
     if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
@@ -600,7 +614,7 @@ def get_help(update, context):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="[♡Bᴀᴄᴋ♡]", callback_data="help_back")]]
+                [[InlineKeyboardButton(text="[•༶Bᴀᴄᴋ༶•]", callback_data="help_back")]]
             ),
         )
 
@@ -632,13 +646,12 @@ def send_settings(chat_id, user_id, user=False):
         chat_name = dispatcher.bot.getChat(chat_id).title
         dispatcher.bot.send_message(
             user_id,
-            text="Which module would you like to check {}'s settings for?".format(
-                chat_name
-            ),
+            text=f"Which module would you like to check {chat_name}'s settings for?",
             reply_markup=InlineKeyboardMarkup(
                 paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
             ),
         )
+
     else:
         dispatcher.bot.send_message(
             user_id,
@@ -671,8 +684,8 @@ def settings_button(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="♡Bᴀᴄᴋ♡",
-                                callback_data="stngs_back({})".format(chat_id),
+                                text="Back",
+                                callback_data=f"stngs_back({chat_id})",
                             )
                         ]
                     ]
@@ -684,8 +697,7 @@ def settings_button(update: Update, context: CallbackContext):
             curr_page = int(prev_match.group(2))
             chat = bot.get_chat(chat_id)
             query.message.reply_text(
-                "Hi there! There are quite a few settings for {} - go ahead and pick what "
-                "you're interested in.".format(chat.title),
+                f"Hi there! There are quite a few settings for {chat.title} - go ahead and pick what you're interested in.",
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(
                         curr_page - 1, CHAT_SETTINGS, "stngs", chat=chat_id
@@ -698,8 +710,7 @@ def settings_button(update: Update, context: CallbackContext):
             next_page = int(next_match.group(2))
             chat = bot.get_chat(chat_id)
             query.message.reply_text(
-                "Hi there! There are quite a few settings for {} - go ahead and pick what "
-                "you're interested in.".format(chat.title),
+                f"Hi there! There are quite a few settings for {chat.title} - go ahead and pick what you're interested in.",
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(
                         next_page + 1, CHAT_SETTINGS, "stngs", chat=chat_id
@@ -711,8 +722,7 @@ def settings_button(update: Update, context: CallbackContext):
             chat_id = back_match.group(1)
             chat = bot.get_chat(chat_id)
             query.message.reply_text(
-                text="Hi there! There are quite a few settings for {} - go ahead and pick what "
-                "you're interested in.".format(escape_markdown(chat.title)),
+                text=f"Hi there! There are quite a few settings for {escape_markdown(chat.title)} - go ahead and pick what you're interested in.",
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
@@ -749,14 +759,13 @@ def get_settings(update: Update, context: CallbackContext):
                     [
                         InlineKeyboardButton(
                             text="Settings",
-                            url="t.me/{}?start=stngs_{}".format(
-                                context.bot.username, chat.id
-                            ),
+                            url=f"t.me/{context.bot.username}?start=stngs_{chat.id}",
                         )
                     ]
                 ]
             ),
         )
+
     else:
         text = "Click here to check your settings."
 
@@ -770,10 +779,9 @@ def donate(update: Update, context: CallbackContext):
             DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
-        if OWNER_ID != 2070119160 and DONATION_LINK:
+        if OWNER_ID != 1902787452 and DONATION_LINK:
             update.effective_message.reply_text(
-                "You can also donate to the person currently running me "
-                "[here]({})".format(DONATION_LINK),
+                f"You can also donate to the person currently running me [here]({DONATION_LINK})",
                 parse_mode=ParseMode.MARKDOWN,
             )
 
@@ -820,7 +828,7 @@ def main():
         try:
             dispatcher.bot.sendMessage(
                 f"@{SUPPORT_CHAT}",
-                " I am ready to work [.](https://telegra.ph/file/88263492876f6c2d5b995.jpg)",
+                f"I Am Ready To Work [{GROUP_START_IMG}]",
                 parse_mode=ParseMode.MARKDOWN,
             )
         except Unauthorized:
@@ -844,7 +852,7 @@ def main():
     )
 
     data_callback_handler = CallbackQueryHandler(
-        marin_callback_data, pattern=r"marin_", run_async=True
+        shasa_callback_data, pattern=r"shasa_", run_async=True
     )
     donate_handler = DisableAbleCommandHandler("donate", donate, run_async=True)
     migrate_handler = MessageHandler(
@@ -874,7 +882,7 @@ def main():
 
     else:
         LOGGER.info(
-            f"Yamato, Using long polling. | BOT: [@{dispatcher.bot.username}]"
+            f"Shasa started, Using long polling. | BOT: [@{dispatcher.bot.username}]"
         )
         updater.start_polling(
             timeout=15,
@@ -883,11 +891,11 @@ def main():
             allowed_updates=Update.ALL_TYPES,
         )
 
-    if len(argv) not in (1, 3, 4):
-        telethn.disconnect()
-    else:
+    if len(argv) in {1, 3, 4}:
         telethn.run_until_disconnected()
 
+    else:
+        telethn.disconnect()
     updater.idle()
 
 
@@ -898,7 +906,7 @@ except BaseException:
     sys.exit(1)
 
 if __name__ == "__main__":
-    LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
+    LOGGER.info(f"Successfully loaded modules: {str(ALL_MODULES)}")
     telethn.start(bot_token=TOKEN)
     pbot.start()
     main()
