@@ -1,29 +1,3 @@
-"""
-MIT License
-
-Copyright (C) 2021 MdNoor786
-
-This file is part of @Shasa_RoBot (Telegram Bot)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 import html
 import importlib
 import json
@@ -48,8 +22,8 @@ from telegram.ext import CallbackContext, CallbackQueryHandler, Filters, Message
 from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
-import ShasaBot.modules.sql.users_sql as sql
-from ShasaBot import (
+import YamatoRobot.modules.sql.users_sql as sql
+from YamatoRobot import (
     BOT_NAME,
     BOT_USERNAME,
     CERT_PATH,
@@ -73,11 +47,11 @@ from ShasaBot import (
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from ShasaBot.modules import ALL_MODULES
-from ShasaBot.modules.disable import DisableAbleCommandHandler
-from ShasaBot.modules.helper_funcs.alternate import typing_action
-from ShasaBot.modules.helper_funcs.chat_status import is_user_admin
-from ShasaBot.modules.helper_funcs.misc import paginate_modules
+from YamatoRobot.modules import ALL_MODULES
+from YamatoRobot.modules.disable import DisableAbleCommandHandler
+from YamatoRobot.modules.helper_funcs.alternate import typing_action
+from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
+from YamatoRobot.modules.helper_funcs.misc import paginate_modules
 
 
 def get_readable_time(seconds: int) -> str:
@@ -110,12 +84,12 @@ START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
 ────「 [{}](https://telegra.ph/file/ae41ca22aaff27dfb50cc.jpg) 」────
-*ʜᴇʏ! {},*
-*ɪ ᴀᴍ 𝐒𝐡𝐚𝐬𝐚 ᴀɴ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ᴀᴅᴠᴀɴᴄᴇ ɢʀᴏᴜᴏ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ᴡɪᴛʜ ᴀ ʟᴏᴛ ᴏғ sᴘᴇᴄɪᴀʟɪᴛʏ.*
+ʜᴇʏᴏ! ᴡᴀᴛᴀꜱʜɪ ᴡᴀ ɴᴏ ʏᴀᴍᴀᴛᴏ ᴅᴇꜱᴜ ᴋᴀ ɪ ᴍ ʜᴇʀᴇ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ✓• *Uptime:* `{}`
+It Has Music too Yuuki 3.0 Blazing Fast Music ✨
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-➛ᴛʀʏ ᴛʜᴇ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴛᴏ ᴋɴᴏᴡ ᴍʏ ᴀʙɪʟɪᴛɪᴇs ××
+ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ 💖 ××
 """
 
 GROUP_START_TEXT = """
@@ -131,17 +105,17 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ɪɴғᴏ", callback_data="shasa_basichelp"),
-        InlineKeyboardButton(text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""),
+        InlineKeyboardButton(text="DEVIL FRUIT", callback_data="shasa_basichelp"),
+        InlineKeyboardButton(text="KAZUTORA HANMEMIYA", url="https://t.me/zerohisoka"),
     ],
     [
-        InlineKeyboardButton(text="ʜᴇʟᴘ", callback_data="help_back"),
+        InlineKeyboardButton(text=" MY HAKI", callback_data="help_back"),
     ],
 ]
 
 
 HELP_STRINGS = """
-Hey there! Myself [𝐒𝐡𝐚𝐬𝐚](https://telegra.ph/file/c3f91b87fa65cd83f306d.jpg).
+Hey there! Myself [Yamato](https://telegra.ph/file/c3f91b87fa65cd83f306d.jpg).
 I'm a Queen For Fun and help admins manage their groups ! Have a look at the following for an idea of some of the things I can help you with.
 
 *Main* commands available:
@@ -276,7 +250,7 @@ def start(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_animation(
             GROUP_START_IMG,
-            caption="<code>Shasa is Here For You💜\nI am Awake Since</code>: <code>{}</code>".format(
+            caption="<code>YamatoRobot is Here For You💜\nI am Awake Since</code>: <code>{}</code>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
@@ -290,7 +264,7 @@ def start(update: Update, context: CallbackContext):
                     [
                         InlineKeyboardButton(
                             text="ᴜᴘᴅᴀᴛᴇs",
-                            url="https://telegram.dog/LionXupdates",
+                            url="https://telegram.dog/BoaHancock_Support",
                         )
                     ],
                 ]
@@ -430,11 +404,11 @@ def shasa_callback_data(update, context):
     if query.data == "shasa_":
         query.message.edit_text(
             text="""ℹ️ ι'м *ѕнαѕα*, α ρσωєяfυℓ gяσυρ мαиαgємєит вσт вυιℓт тσ нєℓρ уσυ мαиαgє уσυя gяσυρ єαѕιℓу.
-        ❍ 💜[Owner](https://t.me/Simpleboy786)💜
-        ❍ 🧡[Updates](https://t.me/Shasa_News)🧡
-        ❍ 🤍[Suppσrt](https://t.me/joinchat/P8HIdXOL8V9iNjRh)🤍
-        ❍ 💚[LionZUb](https://t.me/LionXSupport)💚
-        ❍ ❤️[ChatGrp](https://t.me/TotalNadaniya)❤️
+        ❍ 💜[Owner](https://t.me/zerohisoka)💜
+        ❍ 🧡[Updates](https://t.me/boa_updates)🧡
+        ❍ 🤍[Suppσrt](https://t.me/BoaHancock_Support)🤍
+        ❍ 💚[LionZUb](https://t.me/BoaHancock_Support)💚
+        ❍ ❤️[ChatGrp](https://t.me/straydogs)❤️
         ✨[Vc Player Help](https://telegra.ph/Shasa-Music-08-15)✨""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -522,7 +496,7 @@ def shasa_callback_data(update, context):
                             text="sᴜᴘᴘᴏʀᴛ", url=f"https://telegram.dog/{SUPPORT_CHAT}"
                         ),
                         InlineKeyboardButton(
-                            text="ᴜᴘᴅᴀᴛᴇs", url="https://t.me/LionXupdates"
+                            text="ᴜᴘᴅᴀᴛᴇs", url="https://t.me/BoaHancock_Supoort"
                         ),
                     ],
                     [
@@ -542,15 +516,15 @@ def shasa_callback_data(update, context):
                     [
                         InlineKeyboardButton(text="ᴅᴇᴠ", url="t.me/simpleboy786"),
                         InlineKeyboardButton(
-                            text="ɢɪᴛʜᴜʙ", url="https://github.com/MdNoor786"
+                            text="ɢɪᴛʜᴜʙ", url="https://github.com/Nchuuya"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴅᴇᴠ²", url="https://t.me/Copyless786"
+                            text="ᴅᴇᴠ²", url="https://t.me/zerohisoka"
                         ),
                         InlineKeyboardButton(
-                            text="ʀᴇᴅʟɪᴏɴ", url="https://t.me/Shasa_News/12"
+                            text="ʀᴇᴅʟɪᴏɴ", url="https://t.me/boa_updates"
                         ),
                     ],
                     [
