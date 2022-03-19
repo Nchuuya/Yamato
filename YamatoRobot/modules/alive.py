@@ -9,9 +9,9 @@ from YamatoRobot.events import register
 from YamatoRobot import telethn as tbot
 
 
-PHOTO = "https://telegra.ph/file/88263492876f6c2d5b995.jpg"
+PHOTO = "https://telegra.ph/file/00409644b0a6b670bc320.jpg"
 
-@register(pattern=("/alive"))
+@register(pattern=("/halive"))
 async def awake(event):
   TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Yamato Nice to Meet you💖💜** \n\n"
   TEXT += "💠 **I'm Working Properly** \n\n"
