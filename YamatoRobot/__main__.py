@@ -82,7 +82,7 @@ HELP_MSG = "Click the button below to get help manu in your pm."
 START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
-────「 [{}](https://telegra.ph/file/d5b1b51e1d25769965732.jpg) 」────
+────「 [{}](https://telegra.ph/file/b3bacde666d6c107b16e6.jpg) 」────
 ʜᴇʏᴏ! ᴡᴀᴛᴀꜱʜɪ ᴡᴀ ɴᴏ ʏᴀᴍᴀᴛᴏ ᴅᴇꜱᴜ ᴋᴀ 
 ɪ ᴍ ʜᴇʀᴇ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ
 ʙᴜᴛ ɪ ᴍɪꜱꜱ ᴍʏ ᴏᴅᴇɴ ꜱᴀᴍᴀ ꜱᴏ ɢɪᴠᴇ ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ
@@ -400,7 +400,7 @@ def help_button(update, context):
 
     except BadRequest:
         pass
-GROUP_START_IMG = "https://telegra.ph/file/eaa3c5ab68c2927038f16.jpg"
+
 
 def marin_callback_data(update, context):
     query = update.callback_query
