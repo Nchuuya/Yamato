@@ -7,7 +7,6 @@ import time
 import traceback
 from sys import argv
 from typing import Optional
-
 from pyrogram import idle
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import (
@@ -28,7 +27,6 @@ from YamatoRobot import (
     BOT_USERNAME,
     CERT_PATH,
     DONATION_LINK,
-    GROUP_START_IMG,
     HELP_IMG,
     LOGGER,
     OWNER_ID,
@@ -96,6 +94,7 @@ Music Support Yuuki 3.0✨
 """
 
 GROUP_START_TEXT = """
+────「 [{}](https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg)
 ℍ𝕖𝕪𝕠! 𝕎𝕒𝕥𝕒𝕤𝕙𝕚 𝕨𝕒 𝕟𝕠 𝕪𝕒𝕞𝕒𝕥𝕠 𝕕𝕖𝕤𝕦 𝕜𝕒 
 𝕀 𝕞 𝕙𝕖𝕣𝕖 𝕥𝕠 𝕞𝕒𝕟𝕒𝕘𝕖 𝕪𝕠𝕦𝕣 𝕘𝕣𝕠𝕦𝕡 {}
 """
