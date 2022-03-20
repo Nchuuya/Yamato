@@ -100,3 +100,12 @@ SIGMA = (
     "https://te.legra.ph/file/1e38235febfe52cdd0490.mp4",
     "https://te.legra.ph/file/e27fd617cc4e52835cb76.mp4",
 )
+
+
+COSPLAY = (
+    "https://telegra.ph/file/c296eb3d7603a31062159.jpg",
+    "https://telegra.ph/file/baddf7835b291a7fd3cfd.jpg",
+    "https://telegra.ph/file/dfbf2aaa731e1cf00a2e1.jpg",
+    "https://telegra.ph/file/893a0c47cec218d449965.jpg",
+    "https://telegra.ph/file/5d46622a69d528737ddb9.jpg",
+)
