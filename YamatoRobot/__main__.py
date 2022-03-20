@@ -83,14 +83,19 @@ HELP_MSG = "Click the button below to get help manu in your pm."
 START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
-────「 [{}](https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg) 」────
-ʜᴇʏᴏ! ᴡᴀᴛᴀꜱʜɪ ᴡᴀ ɴᴏ ʏᴀᴍᴀᴛᴏ ᴅᴇꜱᴜ ᴋᴀ ɪ ᴍ ʜᴇʀᴇ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ
+────「 [{}](https://telegra.ph/file/f272b3d6ddd23dad0f9de.mp4) 」────
+ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ 💖 ××
+"""
+ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.
+sɪʀ/ᴍᴀ'ᴀᴍ ᴘʟᴇᴀsᴇ ᴛᴇʟʟ ᴍᴇ ᴛʜᴇ ᴡᴀʏ ᴜ ᴡᴀɴᴛ ᴛᴏ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ 
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ✓• *Uptime:* `{}`
 It Has Music too Yuuki 3.0 Blazing Fast Music ✨
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ 💖 ××
-"""
+ᴄʜᴏᴏsᴇ:
+ɴᴏʀᴍᴀʟ sᴛᴀʀᴛ
+ʟᴇᴡᴅ sᴛᴀʀᴛ
+ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ
 
 GROUP_START_TEXT = """
 I'm awake already!
@@ -100,31 +105,31 @@ Haven't slept since: {}
 buttons = [
     [
         InlineKeyboardButton(
-            text=f"Add {BOT_NAME} To Your Group",
+            text=f"Add Yamato To Your Group",
             url=f"t.me/{BOT_USERNAME}?startgroup=true",
         )
     ],
     [
-        InlineKeyboardButton(text="DEVIL FRUIT", callback_data="shasa_basichelp"),
-        InlineKeyboardButton(text="KAZUTORA HANMEMIYA", url="https://t.me/zerohisoka"),
+        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=hstart"),
+        InlineKeyboardButton(text="ʟᴇᴡᴅ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=lstart"),
     ],
     [
-        InlineKeyboardButton(text=" MY HAKI", callback_data="help_back"),
+        InlineKeyboardButton(text="ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ", url="https://t.me/zerohisoka"),
     ],
 ]
 
 
 HELP_STRINGS = """
-Hey there! Myself [Yamato](https://telegra.ph/file/00409644b0a6b670bc320.jpg).
-I'm a Queen For Fun and help admins manage their groups ! Have a look at the following for an idea of some of the things I can help you with.
+ʜᴇʏ ᴛʜᴇʀᴇ! ᴍʏsᴇʟғ [ʏᴀᴍᴀᴛᴏ](https://telegra.ph/file/00409644b0a6b670bc320.jpg).
+ɪ'ᴍ ᴀ ǫᴜᴇᴇɴ ғᴏʀ ғᴜɴ ᴀɴᴅ ʜᴇʟᴘ ᴀᴅᴍɪɴs ᴍᴀɴᴀɢᴇ ᴛʜᴇɪʀ ɢʀᴏᴜᴘs ! ʜᴀᴠᴇ ᴀ ʟᴏᴏᴋ ᴀᴛ ᴛʜᴇ ғᴏʟʟᴏᴡɪɴɢ ғᴏʀ ᴀɴ ɪᴅᴇᴀ ᴏғ sᴏᴍᴇ ᴏғ ᴛʜᴇ ᴛʜɪɴɢs ɪ ᴄᴀɴ ʜᴇʟᴘ ʏᴏᴜ ᴡɪᴛʜ.
 
-*Main* commands available:
- ➛ /help: PM's you this message.
- ➛ /help <module name>: PM's you info about that module.
- ➛ /donate: information on how to donate!
- ➛ /settings:
-   ❂ in PM: will send you your settings for all supported modules.
-   ❂ in a group: will redirect you to pm, with all that chat's settings.
+*ᴍᴀɪɴ* ᴄᴏᴍᴍᴀɴᴅs ᴀᴠᴀɪʟᴀʙʟᴇ:
+ ➛ /ʜᴇʟᴘ: ᴘᴍ's ʏᴏᴜ ᴛʜɪs ᴍᴇssᴀɢᴇ.
+ ➛ /ʜᴇʟᴘ <ᴍᴏᴅᴜʟᴇ ɴᴀᴍᴇ>: ᴘᴍ's ʏᴏᴜ ɪɴғᴏ ᴀʙᴏᴜᴛ ᴛʜᴀᴛ ᴍᴏᴅᴜʟᴇ.
+ ➛ /ᴅᴏɴᴀᴛᴇ: ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴏɴ ʜᴏᴡ ᴛᴏ ᴅᴏɴᴀᴛᴇ!
+ ➛ /sᴇᴛᴛɪɴɢs:
+   ❂ ɪɴ ᴘᴍ: ᴡɪʟʟ sᴇɴᴅ ʏᴏᴜ ʏᴏᴜʀ sᴇᴛᴛɪɴɢs ғᴏʀ ᴀʟʟ sᴜᴘᴘᴏʀᴛᴇᴅ ᴍᴏᴅᴜʟᴇs.
+   ❂ ɪɴ ᴀ ɢʀᴏᴜᴘ: ᴡɪʟʟ ʀᴇᴅɪʀᴇᴄᴛ ʏᴏᴜ ᴛᴏ ᴘᴍ, ᴡɪᴛʜ ᴀʟʟ ᴛʜᴀᴛ ᴄʜᴀᴛ's sᴇᴛᴛɪɴɢs.
 """
 
 DONATE_STRING = """❂ I'm Free for Everyone ❂"""
@@ -403,7 +408,7 @@ def shasa_callback_data(update, context):
     uptime = get_readable_time((time.time() - StartTime))
     if query.data == "shasa_":
         query.message.edit_text(
-            text="""ℹ️ ι'м *ѕнαѕα*, α ρσωєяfυℓ gяσυρ мαиαgємєит вσт вυιℓт тσ нєℓρ уσυ мαиαgє уσυя gяσυρ єαѕιℓу.
+            text="""ℹ️ ι'м *Yamato*, α ρσωєяfυℓ gяσυρ мαиαgємєит вσт вυιℓт тσ нєℓρ уσυ мαиαgє уσυя gяσυρ єαѕιℓу.
         ❍ 💜[Owner](https://t.me/zerohisoka)💜
         ❍ 🧡[Updates](https://t.me/boa_updates)🧡
         ❍ 🤍[Suppσrt](https://t.me/BoaHancock_Support)🤍
@@ -486,7 +491,7 @@ def shasa_callback_data(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", url="t.me/Shasa_News"),
+                        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", url="t.me/boa_updates"),
                         InlineKeyboardButton(
                             text="ᴠᴄ ʜᴇʟᴘ", url="https://telegra.ph/Shasa-Music-08-15"
                         ),
