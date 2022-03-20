@@ -299,19 +299,19 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThe Disaster level of this person is 'Lord'."
+        text += "\n\nThe Disaster level of this person is 'My Hisband'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\nThis user is member of 'Dev'."
+        text += "\n\nThis user is My 'Sex Partner'."
         disaster_level_present = True
     elif user.id in REDLIONS:
-        text += "\n\nThe Disaster level of this person is 'Mizunoto'."
+        text += "\n\nThis User is My 'Boyfriend'."
         disaster_level_present = True
     elif user.id in SPRYZONS:
-        text += "\n\nThe Disaster level of this person is 'Kanoto'."
+        text += "\n\nThis User is My ' Lover'."
         disaster_level_present = True
     elif user.id in FAFNIRS:
-        text += "\n\nThe Disaster level of this person is 'Hinoto'."
+        text += "\n\nThis User is My 'Besto!'."
         disaster_level_present = True
     elif user.id in LUINORS:
         text += "\n\nThe Disaster level of this person is 'Friend'."
@@ -321,7 +321,7 @@ def info(update: Update, context: CallbackContext):
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' [<a href="https://t.me/NobaraUpdates/63">?</a>]'.format(
+        text += ' [<a href="https://t.me/boa_updates">?</a>]'.format(
             bot.username,
         )
 
@@ -424,29 +424,29 @@ def set_about_me(update: Update, context: CallbackContext):
 def stats(update, context):
     uptime = datetime.datetime.fromtimestamp(boot_time()).strftime("%Y-%m-%d %H:%M:%S")
     botuptime = get_readable_time((time.time() - StartTime))
-    status = "*╒═══「 Nezuko statistics 」*\n\n"
-    status += "*➢ System Start time:* " + str(uptime) + "\n"
+    status = "*╒═══「 Yamato statistics 」*\n\n"
+    status += "*✨ System Start time:* " + str(uptime) + "\n"
     uname = platform.uname()
-    status += "*➢ System:* " + str(uname.system) + "\n"
-    status += "*➢ Node name:* " + escape_markdown(str(uname.node)) + "\n"
-    status += "*➢ Release:* " + escape_markdown(str(uname.release)) + "\n"
-    status += "*➢ Machine:* " + escape_markdown(str(uname.machine)) + "\n"
+    status += "*✨ System:* " + str(uname.system) + "\n"
+    status += "*✨ Node name:* " + escape_markdown(str(uname.node)) + "\n"
+    status += "*✨ Release:* " + escape_markdown(str(uname.release)) + "\n"
+    status += "*✨ Machine:* " + escape_markdown(str(uname.machine)) + "\n"
     mem = virtual_memory()
     cpu = cpu_percent()
     disk = disk_usage("/")
-    status += "*➢ CPU:* " + str(cpu) + " %\n"
-    status += "*➢ RAM:* " + str(mem[2]) + " %\n"
-    status += "*➢ Storage:* " + str(disk[3]) + " %\n\n"
-    status += "*➢ Python Version:* " + python_version() + "\n"
-    status += "*➢ python-Telegram-Bot:* " + str(ptbver) + "\n"
-    status += "*➢ Uptime:* " + str(botuptime) + "\n"
+    status += "*✨ CPU:* " + str(cpu) + " %\n"
+    status += "*✨ RAM:* " + str(mem[2]) + " %\n"
+    status += "*✨ Storage:* " + str(disk[3]) + " %\n\n"
+    status += "*✨ Python Version:* " + python_version() + "\n"
+    status += "*✨ python-Telegram-Bot:* " + str(ptbver) + "\n"
+    status += "*✨ Uptime:* " + str(botuptime) + "\n"
     try:
         update.effective_message.reply_text(
             status
             + "\n*Bot statistics*:\n"
             + "\n".join([mod.__stats__() for mod in STATS])
-            + f"\n\n [✦Updates](https://t.me/MarinUpdates) | [✦Support](https://t.me/NobaraSupport)\n\n"
-            + "╘══「 by [UNKNOWN](https://t.me/XtheAnonymous) 」\n",
+            + f"\n\n [✦ᴜᴘᴅᴀᴛᴇs](https://t.me/boa_updates) | [✦sᴜᴘᴘᴏʀᴛ](https://t.me/BoaHancock_Support)\n\n"
+            + "╘══「 by [ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ](https://t.me/zerohisoka) 」\n",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
         )
@@ -458,9 +458,9 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + f"\n\n [✦Updates](https://t.me/MaRINsUPDATES) | [✦Support](https://t.me/{SUPPORT_CHAT})\n\n"
+                    + f"\n\n [✦ᴜᴘᴅᴀᴛᴇs](https://t.me/boa_updates) | [✦sᴜᴘᴘᴏʀᴛ](https://t.me/{SUPPORT_CHAT})\n\n"
                 )
-                + "╘══「 by [Unknown](https://t.me/XtheAnonymous) 」\n"
+                + "╘══「 by [ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ](https://t.me/zerohisoka) 」\n"
             ),
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
