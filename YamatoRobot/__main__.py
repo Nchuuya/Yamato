@@ -97,6 +97,8 @@ It Has Music too Yuuki 3.0 Blazing Fast Music ✨
 ʟᴇᴡᴅ sᴛᴀʀᴛ
 ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ
 
+"""
+
 GROUP_START_TEXT = """
 I'm awake already!
 Haven't slept since: {}
