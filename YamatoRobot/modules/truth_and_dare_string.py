@@ -125,10 +125,10 @@ COSPLAY = (
 
 
 WAIFU = (
-   ""
-   ""
-   ""
-   ""
+   "https://telegra.ph/file/ec23f8f3631f5a4a247aa.jpg"
+   "https://telegra.ph/file/92aa2b0d4fafc81772820.jpg"
+   "https://telegra.ph/file/57b186d976b83e4bcf0ce.jpg"
+   "https://telegra.ph/file/6e9356fa15d997af52447.jpg"
    ""
    ""
    ""
