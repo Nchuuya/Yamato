@@ -423,19 +423,22 @@ def shasa_callback_data(update, context):
         )
     elif query.data == "shasa_basichelp":
         query.message.edit_text(
-            text=f"────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ."
+            text=
+            """ 
+            ────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ."
             ᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !
             ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*
             ➖➖➖➖➖➖➖➖➖➖➖➖➖
             ✓• *User:* `{}`
             It Has Music too Yuuki 3.0 Blazing Fast Music ✨
-            ➖➖➖➖➖➖➖➖➖➖➖➖➖
+            ➖➖➖➖➖➖➖➖➖➖➖➖➖ 
+            """
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ᴀᴅᴅ ʏᴀᴍᴀᴛᴏ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
+                        InlineKeyboardButton(text=f"ᴀᴅᴅ ʏᴀᴍᴀᴛᴏ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
                     ],
                     [
                         
@@ -445,7 +448,7 @@ def shasa_callback_data(update, context):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="【༶Home༶】", callback_data="shasa_back"
+                            text=f"【༶Home༶】", callback_data="shasa_back"
                         ),
                     ],
                 ]
