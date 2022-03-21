@@ -284,9 +284,9 @@ def kuni(update, context):
     msg.reply_video(nekos.img(target))
 
 
-def waifu(update, context):
+def swaifu(update, context):
     msg = update.effective_message
-    target = "waifu"
+    target = "swaifu"
     with open("temp.png", "wb") as f:
         f.write(requests.get(nekos.img(target)).content)
     img = Image.open("temp.png")
@@ -531,7 +531,7 @@ __handlers__ = [
     HENTAIGIF_HANDLER,
     CLASSIC_HANDLER,
     KUNI_HANDLER,
-    WAIFU_HANDLER,
+    SWAIFU_HANDLER,
     LEWD_HANDLER,
     KISS_HANDLER,
     FEMDOM_HANDLER,
