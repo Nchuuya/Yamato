@@ -110,7 +110,7 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_basichelp""),
+        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_basichelp"),
         InlineKeyboardButton(text="ʟᴇᴡᴅ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=lstart"),
     ],
     [
