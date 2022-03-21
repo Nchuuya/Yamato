@@ -119,3 +119,10 @@ COSPLAY = (
     "https://telegra.ph/file/7842a0e654bd98b67f989.jpg",
     "https://telegra.ph/file/1b2f171142860178072e3.jpg",
 )
+
+
+
+
+
+ANIMEVS = (
+   "https://telegra.ph/file/953ec643c106f49d7db70.mp4"
