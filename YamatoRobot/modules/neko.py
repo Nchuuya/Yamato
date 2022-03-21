@@ -284,9 +284,9 @@ def kuni(update, context):
     msg.reply_video(nekos.img(target))
 
 
-def Waifu(update, context):
+def swaifu(update, context):
     msg = update.effective_message
-    target = "Waifu"
+    target = "swaifu"
     with open("temp.png", "wb") as f:
         f.write(requests.get(nekos.img(target)).content)
     img = Image.open("temp.png")
@@ -425,7 +425,7 @@ PUSSY_HANDLER = CommandHandler("pussy", pussy, run_async=True)
 HENTAIGIF_HANDLER = CommandHandler("hentaigif", hentaigif, run_async=True)
 CLASSIC_HANDLER = CommandHandler("classic", classic, run_async=True)
 KUNI_HANDLER = CommandHandler("kuni", kuni, run_async=True)
-WAIFU_HANDLER = CommandHandler("Waifu", Waifu, run_async=True)
+WAIFU_HANDLER = CommandHandler("swaifu", swaifu, run_async=True)
 LEWD_HANDLER = CommandHandler("lewd", lewd, run_async=True)
 KISS_HANDLER = CommandHandler("kiss", kiss, run_async=True)
 FEMDOM_HANDLER = CommandHandler("femdom", femdom, run_async=True)
