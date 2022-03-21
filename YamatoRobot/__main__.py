@@ -84,11 +84,11 @@ START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
 ────「 [{}](https://telegra.ph/file/f272b3d6ddd23dad0f9de.mp4) 」────
-ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ 💖 ××
+Hoi ,ᴍᴇ ᴇɴᴏᴜɢʜ ʀɪɢʜᴛꜱ ᴛᴏ ꜱʜᴏᴡ ʏᴏᴜ ᴍʏ ʜᴀᴋɪ 💖 ××
 ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.
 sɪʀ/ᴍᴀ'ᴀᴍ ᴘʟᴇᴀsᴇ ᴛᴇʟʟ ᴍᴇ ᴛʜᴇ ᴡᴀʏ ᴜ ᴡᴀɴᴛ ᴛᴏ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ 
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-✓• *Uptime:* `{}`
+✓• *User:* `{}`
 It Has Music too Yuuki 3.0 Blazing Fast Music ✨
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ᴄʜᴏᴏsᴇ:
@@ -111,7 +111,7 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=hstart"),
+        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_""),
         InlineKeyboardButton(text="ʟᴇᴡᴅ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=lstart"),
     ],
     [
@@ -424,11 +424,9 @@ def shasa_callback_data(update, context):
         )
     elif query.data == "shasa_basichelp":
         query.message.edit_text(
-            text=f"*Here's basic Help regarding* *How to use Me?*"
-            f"\n\n• Firstly Add {dispatcher.bot.first_name} to your group by pressing [here](http://t.me/{dispatcher.bot.username}?startgroup=true)\n"
-            f"\n• After adding promote me manually with full rights for faster experience.\n"
-            f"\n• Than send `/admincache@Shasa_RoBot` in that chat to refresh admin list in My database.\n"
-            f"\n\n*All done now use below given button's to know about use!*\n"
+            text=f"ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ."
+            f"\ᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !\n"
+            f"\n\n*ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*\n"
             f"",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -436,7 +434,6 @@ def shasa_callback_data(update, context):
                 [
                     [
                         InlineKeyboardButton(text="ᴀᴅᴍɪɴ", callback_data="shasa_admin"),
-                        InlineKeyboardButton(text="ɴᴏᴛᴇs", callback_data="shasa_notes"),
                     ],
                     [
                         InlineKeyboardButton(
@@ -448,7 +445,7 @@ def shasa_callback_data(update, context):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_back"
+                            text="【༶Home༶】", callback_data="shasa_back"
                         ),
                     ],
                 ]
