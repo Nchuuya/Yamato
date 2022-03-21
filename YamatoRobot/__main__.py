@@ -92,7 +92,6 @@ sɪʀ/ᴍᴀ'ᴀᴍ ᴘʟᴇᴀsᴇ ᴛᴇʟʟ ᴍᴇ ᴛʜᴇ ᴡᴀʏ ᴜ ᴡ�
 It Has Music too Yuuki 3.0 Blazing Fast Music ✨
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ᴄʜᴏᴏsᴇ:
-ɴᴏʀᴍᴀʟ sᴛᴀʀᴛ
 ʟᴇᴡᴅ sᴛᴀʀᴛ
 ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ
 
@@ -111,7 +110,7 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_""),
+        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_basichelp""),
         InlineKeyboardButton(text="ʟᴇᴡᴅ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=lstart"),
     ],
     [
@@ -424,23 +423,24 @@ def shasa_callback_data(update, context):
         )
     elif query.data == "shasa_basichelp":
         query.message.edit_text(
-            text=f"ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ."
-            f"\ᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !\n"
-            f"\n\n*ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*\n"
-            f"",
+            text=f"────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ."
+            ᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !
+            ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*
+            ➖➖➖➖➖➖➖➖➖➖➖➖➖
+            ✓• *User:* `{}`
+            It Has Music too Yuuki 3.0 Blazing Fast Music ✨
+            ➖➖➖➖➖➖➖➖➖➖➖➖➖
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(text="ᴀᴅᴍɪɴ", callback_data="shasa_admin"),
+                        InlineKeyboardButton(text="ᴀᴅᴅ ʏᴀᴍᴀᴛᴏ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
                     ],
                     [
+                        
                         InlineKeyboardButton(
-                            text="sᴜᴘᴘᴏʀᴛ", callback_data="shasa_support"
-                        ),
-                        InlineKeyboardButton(
-                            text="ᴄʀᴇᴅɪᴛ", callback_data="shasa_credit"
+                            text="ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ", url="https://t.me/zerohisoka"
                         ),
                     ],
                     [
