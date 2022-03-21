@@ -21,7 +21,7 @@ def sigma(update: Update, context: CallbackContext):
 
 
 def cosplay(update: Update, context: CallbackContext):
-    update.effective_message.reply_image(random.choice(truth_and_dare_string.COSPLAY))
+    update.effective_message.reply_photo(random.choice(truth_and_dare_string.COSPLAY))
 
 
 
