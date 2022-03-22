@@ -409,7 +409,7 @@ def shasa_callback_data(update, context):
     uptime = get_readable_time((time.time() - StartTime))
     if query.data == "shasa_":
         query.message.edit_text(
-            text="""ℹ️ ι'м *Yamato*, α ρσωєяfυℓ gяσυρ мαиαgємєит вσт вυιℓт тσ нєℓρ уσυ мαиαgє уσυя gяσυρ єαѕιℓу.
+            caption="""ℹ️ ι'м *Yamato*, α ρσωєяfυℓ gяσυρ мαиαgємєит вσт вυιℓт тσ нєℓρ уσυ мαиαgє уσυя gяσυρ єαѕιℓу.
         ❍ 💜[Owner](https://t.me/zerohisoka)💜
         ❍ 🧡[Updates](https://t.me/boa_updates)🧡
         ❍ 🤍[Suppσrt](https://t.me/BoaHancock_Support)🤍
