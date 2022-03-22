@@ -423,16 +423,7 @@ def shasa_callback_data(update, context):
         )
     elif query.data == "shasa_basichelp":
         query.message.edit_text(
-            text=
-            """ 
-            ────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.
-            ᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !
-            ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*
-            ➖➖➖➖➖➖➖➖➖➖➖➖➖
-            ✓• *User:* `{}`
-            It Has Music too Yuuki 3.0 Blazing Fast Music ✨
-            ➖➖➖➖➖➖➖➖➖➖➖➖➖ 
-            """
+            text= ""  ────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !\nᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n✓• *User:* `{}`\nIt Has Music too Yuuki 3.0 Blazing Fast Music ✨\n➖➖➖➖➖➖➖➖➖➖➖➖➖ ""
 
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
