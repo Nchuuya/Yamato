@@ -425,7 +425,7 @@ def shasa_callback_data(update, context):
         query.message.edit_text(
             text=
             """ 
-            ────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ."
+            ────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.
             ᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !
             ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*
             ➖➖➖➖➖➖➖➖➖➖➖➖➖
@@ -433,6 +433,7 @@ def shasa_callback_data(update, context):
             It Has Music too Yuuki 3.0 Blazing Fast Music ✨
             ➖➖➖➖➖➖➖➖➖➖➖➖➖ 
             """
+
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
