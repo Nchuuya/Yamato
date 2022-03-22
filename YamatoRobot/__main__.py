@@ -429,8 +429,7 @@ def shasa_callback_data(update, context):
             f"\n ➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
             f"\n ✓• *User:* `{}`\n"
             f"\n It Has Music too Yuuki 3.0 Blazing Fast Music ✨\n"
-            f"\n ➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
-            f"",
+            f"\n ➖➖➖➖➖➖➖➖➖➖➖➖➖\n",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
