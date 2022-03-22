@@ -423,6 +423,7 @@ def shasa_callback_data(update, context):
             ),
         )
     elif query.data == "shasa_basichelp":
+        PHOTO="https://telegra.ph/file/3802a957ef2e3e584248c.jpg"
         query.message.edit_text(
             text="*ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*"
             "\n ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ!\n"
