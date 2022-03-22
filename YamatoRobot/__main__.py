@@ -423,8 +423,14 @@ def shasa_callback_data(update, context):
         )
     elif query.data == "shasa_basichelp":
         query.message.edit_text(
-            text= ""  ────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ !\nᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!*\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n✓• *User:* `{}`\nIt Has Music too Yuuki 3.0 Blazing Fast Music ✨\n➖➖➖➖➖➖➖➖➖➖➖➖➖ ""
-
+            text= f"* ────「 [{}](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*"
+            f"\n ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ! \n"
+            f"\n ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ! \n"
+            f"\n ➖➖➖➖➖➖➖➖➖➖➖➖➖ \n"
+            f"\n ✓• *User:* `{}`\n"
+            f"\n It Has Music too Yuuki 3.0 Blazing Fast Music ✨ \n"
+            f"\n ➖➖➖➖➖➖➖➖➖➖➖➖➖ \n "
+            f"",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
