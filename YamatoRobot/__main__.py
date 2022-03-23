@@ -111,7 +111,7 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_basichelp"),
+        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_"),
         InlineKeyboardButton(text="ʟᴇᴡᴅ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=lstart"),
     ],
     [
@@ -409,22 +409,37 @@ def shasa_callback_data(update, context):
     uptime = get_readable_time((time.time() - StartTime))
     if query.data == "shasa_":
         query.message.edit_text(
-            caption="""ℹ️ ι'м *Yamato*, α ρσωєяfυℓ gяσυρ мαиαgємєит вσт вυιℓт тσ нєℓρ уσυ мαиαgє уσυя gяσυρ єαѕιℓу.
-        ❍ 💜[Owner](https://t.me/zerohisoka)💜
-        ❍ 🧡[Updates](https://t.me/boa_updates)🧡
-        ❍ 🤍[Suppσrt](https://t.me/BoaHancock_Support)🤍
-        ❍ 💚[LionZUb](https://t.me/BoaHancock_Support)💚
-        ❍ ❤️[ChatGrp](https://t.me/straydogs)❤️
-        ✨[Vc Player Help](https://telegra.ph/file/083b92a5e5d58b7a21e26.jpg)✨""",
+            caption="""*[Yamato](https://telegra.ph/file/00409644b0a6b670bc320.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*
+            ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ!
+            ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!
+            ➖➖➖➖➖➖➖➖➖➖➖➖➖
+            ✓• *User:* `{}`
+            It Has Music too Yuuki 3.0 Blazing Fast Music ✨
+            ➖➖➖➖➖➖➖➖➖➖➖➖➖""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="•༶Bᴀᴄᴋ༶•", callback_data="shasa_back")]]
+                [
+                    [
+                        InlineKeyboardButton(text=f"ᴀᴅᴅ ʏᴀᴍᴀᴛᴏ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
+                    ],
+                    [
+                        
+                        InlineKeyboardButton(
+                            text="ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ", url="https://t.me/zerohisoka"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text=f"【༶Home༶】", callback_data="shasa_back"
+                        ),
+                    ],
+                ]
             ),
         )
     elif query.data == "shasa_basichelp":
         query.message.edit_text(
-            caption="""*[Yamato](https://telegra.ph/file/3802a957ef2e3e584248c.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*
+            caption="""*[Yamato](https://telegra.ph/file/00409644b0a6b670bc320.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*
             ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ!
             ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!
             ➖➖➖➖➖➖➖➖➖➖➖➖➖
