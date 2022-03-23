@@ -430,7 +430,7 @@ def shasa_callback_data(update, context):
             ➖➖➖➖➖➖➖➖➖➖➖➖➖
             ✓• *User:* `{}`
             It Has Music too Yuuki 3.0 Blazing Fast Music ✨
-            ➖➖➖➖➖➖➖➖➖➖➖➖➖,
+            ➖➖➖➖➖➖➖➖➖➖➖➖➖""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
