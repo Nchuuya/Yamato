@@ -254,7 +254,7 @@ def start(update: Update, context: CallbackContext):
                 timeout=60,
             )
     else:
-        update.effective_message.reply_animation(
+        update.effective_message.reply_photo(
             GROUP_START_IMG,
             caption="<code>YamatoRobot is Here For You💜\nI am Awake Since</code>: <code>{}</code>".format(
                 uptime
@@ -409,13 +409,15 @@ def shasa_callback_data(update, context):
     uptime = get_readable_time((time.time() - StartTime))
     if query.data == "shasa_":
         query.message.edit_text(
-            caption="""*[Yamato](https://telegra.ph/file/00409644b0a6b670bc320.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*
+            GROUP_START_IMG,
+            text"""*[Yamato](https://telegra.ph/file/00409644b0a6b670bc320.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*
             ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ!
             ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!
             ➖➖➖➖➖➖➖➖➖➖➖➖➖
             ✓• *User:* `{}`
             It Has Music too Yuuki 3.0 Blazing Fast Music ✨
-            ➖➖➖➖➖➖➖➖➖➖➖➖➖""",
+            ➖➖➖➖➖➖➖➖➖➖➖➖➖
+            """,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
