@@ -145,3 +145,15 @@ WAIFU = (
    "https://telegra.ph/file/c476a1ad86ef6dc77c16c.jpg",
    "https://telegra.ph/file/b33c22cb82b14ad5c8e6f.jpg",
 )
+
+
+YAMATO = (
+   "https://telegra.ph/file/7c07f91707b60e47db4d7.jpg",
+   "https://telegra.ph/file/e0f0a0d7953e0b751b58a.jpg",
+   "https://telegra.ph/file/9c456fc114d197df2f381.jpg",
+   "https://telegra.ph/file/fa8a065abb51827987cec.jpg",
+   "https://telegra.ph/file/8636589aac0d6c10f8db0.jpg",
+   "https://telegra.ph/file/cd241f2a632ab086114c6.jpg",
+   "https://telegra.ph/file/fb4859f1a80d3e780ee2f.jpg",
+   "https://telegra.ph/file/7ef157e16d5bce127ae59.jpg",
+)
