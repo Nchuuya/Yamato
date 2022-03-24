@@ -29,6 +29,7 @@ from YamatoRobot import (
     CERT_PATH,
     DONATION_LINK,
     GROUP_START_IMG,
+    HENTAI_START_IMG,
     HELP_IMG,
     LOGGER,
     OWNER_ID,
@@ -54,6 +55,7 @@ from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
 from YamatoRobot.modules.helper_funcs.misc import paginate_modules
 
 GROUP_START_IMG="https://telegra.ph/file/f272b3d6ddd23dad0f9de.mp4"
+HENTAI_START_IMG="https://telegra.ph/file/3481c09762cb1826f8217.jpg"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -84,7 +86,7 @@ HELP_MSG = "Click the button below to get help manu in your pm."
 START_MSG = "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
 
 PM_START_TEXT = """
-────「 [{}](https://telegra.ph/file/f272b3d6ddd23dad0f9de.mp4) 」────
+────「 [{}](https://telegra.ph/file/1b2a5b6e7da22cff4fdda.mp4) 」────
 ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ, ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.××
 sɪʀ/ᴍᴀ'ᴀᴍ ᴘʟᴇᴀsᴇ ᴛᴇʟʟ ᴍᴇ ᴛʜᴇ ᴡᴀʏ ᴜ ᴡᴀɴᴛ ᴛᴏ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ 
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
@@ -92,7 +94,7 @@ sɪʀ/ᴍᴀ'ᴀᴍ ᴘʟᴇᴀsᴇ ᴛᴇʟʟ ᴍᴇ ᴛʜᴇ ᴡᴀʏ ᴜ ᴡ�
 It Has Music too Yuuki 3.0 Blazing Fast Music ✨
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ᴄʜᴏᴏsᴇ:
-ʟᴇᴡᴅ sᴛᴀʀᴛ
+ʜᴇɴᴛᴀɪ ᴀʟɪᴠᴇ - /halive
 ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ - /hstart
 
 """
@@ -118,7 +120,8 @@ buttons = [
     ],
 ]
 PM_HENTAI_TEXT="""
-*[ʏᴀᴍᴀᴛᴏ♡](https://telegra.ph/file/00409644b0a6b670bc320.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*
+────「[{}](https://telegra.ph/file/cd241f2a632ab086114c6.jpg)」────
+ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ
 ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.
 ᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ!
 ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!
@@ -135,11 +138,11 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?hstart=hstart"),
-        InlineKeyboardButton(text="Check if I m alive! XD ", url="t.me/YamatoXRoBot?halive=halive"),
+        InlineKeyboardButton(text="ɴᴇᴡ ᴜᴘᴅᴀᴛᴇꜱ ✨", url="https://t.me/boa_updates/107"),
+        InlineKeyboardButton(text="HELP! ", callback_data=help_back"),
     ],
     [
-        InlineKeyboardButton(text="ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ", url="https://t.me/zerohisoka"),
+        InlineKeyboardButton(text="ᴀᴏɢɪʀɪ ɴᴇᴛᴡᴏʀᴋ", url="https://telegram.dog/AogiriNetwork"),
     ],
 ]
 
@@ -292,8 +295,8 @@ def start(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴜᴘᴅᴀᴛᴇs",
-                            url="https://telegram.dog/BoaHancock_Support",
+                            text="ᴀᴏɢɪʀɪ ɴᴇᴛᴡᴏʀᴋ",
+                            url="https://telegram.dog/AogiriNetwork",
                         )
                     ],
                 ]
@@ -350,7 +353,29 @@ def hstart(update: Update, context: CallbackContext):
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
             )
-
+else:
+        update.effective_message.reply_photo(
+            HENTAI_START_IMG,
+            caption="<code>Ara Ara! I m Feeling Horney asf can u make me feel good!💕\nI am Awake Since</code>: <code>{}</code>".format(
+                uptime
+            ),
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="sᴜᴘᴘᴏʀᴛ", url=f"https://telegram.dog/{SUPPORT_CHAT}"
+                        )
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="ᴜᴘᴅᴀᴛᴇs",
+                            url="https://telegram.dog/BoaHancock_Support",
+                        )
+                    ],
+                ]
+            ),
+        )
 
 def error_handler(update, context):
     """Log the error and send a telegram message to notify the developer."""
