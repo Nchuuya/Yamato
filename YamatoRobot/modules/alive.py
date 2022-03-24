@@ -9,7 +9,7 @@ from YamatoRobot.events import register
 from YamatoRobot import telethn as tbot
 
 
-PHOTO = "https://telegra.ph/file/00409644b0a6b670bc320.jpg"
+PHOTO = "https://telegra.ph/file/8636589aac0d6c10f8db0.jpg"
 
 @register(pattern=("/halive"))
 async def awake(event):
