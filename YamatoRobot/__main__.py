@@ -53,7 +53,7 @@ from YamatoRobot.modules.helper_funcs.alternate import typing_action
 from YamatoRobot.modules.helper_funcs.chat_status import is_user_admin
 from YamatoRobot.modules.helper_funcs.misc import paginate_modules
 
-GROUP_START_IMG="https://telegra.ph/file/3802a957ef2e3e584248c.jpg"
+GROUP_START_IMG="https://telegra.ph/file/f272b3d6ddd23dad0f9de.mp4"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -111,14 +111,37 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", callback_data="shasa_"),
-        InlineKeyboardButton(text="ʟᴇᴡᴅ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=lstart"),
+        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=hstart"),
+        InlineKeyboardButton(text="Check if I m alive! XD ", url="t.me/YamatoXRoBot?start=halive"),
     ],
     [
         InlineKeyboardButton(text="ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ", url="https://t.me/zerohisoka"),
     ],
 ]
-
+PM_HENTAI_TEXT="""
+*[ʏᴀᴍᴀᴛᴏ♡](https://telegra.ph/file/00409644b0a6b670bc320.jpg)ʜᴇʏᴏ! ᴡᴀᴛᴀsʜɪᴡᴀ ʏᴀᴍᴀᴛᴏ*
+ɪ ᴀᴍ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.\nᴛʜɪꜱ ɪꜱ ʜᴇɴᴛᴀɪ ꜱᴛᴀʀᴛ!
+ᴜ ᴄᴀɴ ɢᴏ ʙᴀᴄᴋ ᴏʀ ᴄʜᴏᴏꜱᴇ ᴏɴᴇ ᴏꜰ ᴛʜᴇ ᴏᴘᴛɪᴏɴꜱ ʙᴇʟᴏᴡ!
+➖➖➖➖➖➖➖➖➖➖➖➖➖
+✓• *User:* `{}`
+It Has Music too Yuuki 3.0 Blazing Fast Music ✨
+➖➖➖➖➖➖➖➖➖➖➖➖➖
+"""
+buttons = [
+    [
+        InlineKeyboardButton(
+            text=f"Add Yamato To Your Group",
+            url=f"t.me/{BOT_USERNAME}?startgroup=true",
+        )
+    ],
+    [
+        InlineKeyboardButton(text="NEW UPDATES✨", url="https://t.me/boa_updates"),
+        InlineKeyboardButton(text="Kazutora Hanemiya", url="t.me/YamatoXRoBot?start=lstart"),
+    ],
+    [
+        InlineKeyboardButton(text="ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ", url="https://t.me/zerohisoka"),
+    ],
+]
 
 HELP_STRINGS = """
 ʜᴇʏ ᴛʜᴇʀᴇ! ᴍʏsᴇʟғ [ʏᴀᴍᴀᴛᴏ](https://telegra.ph/file/00409644b0a6b670bc320.jpg).
@@ -254,7 +277,7 @@ def start(update: Update, context: CallbackContext):
                 timeout=60,
             )
     else:
-        update.effective_message.reply_photo(
+        update.effective_message.reply_video(
             GROUP_START_IMG,
             caption="<code>YamatoRobot is Here For You💜\nI am Awake Since</code>: <code>{}</code>".format(
                 uptime
@@ -276,6 +299,57 @@ def start(update: Update, context: CallbackContext):
                 ]
             ),
         )
+def hstart(update: Update, context: CallbackContext):
+    args = context.args
+    uptime = get_readable_time((time.time() - StartTime))
+    if update.effective_chat.type == "private":
+        if len(args) >= 1:
+            if args[0].lower() == "help":
+                send_help(update.effective_chat.id, HELP_STRINGS)
+            elif args[0].lower().startswith("ghelp_"):
+                mod = args[0].lower().split("_", 1)[1]
+                if not HELPABLE.get(mod, False):
+                    return
+                send_help(
+                    update.effective_chat.id,
+                    HELPABLE[mod].__help__,
+                    InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="[•༶B𝚊𝚌k༶•]", callback_data="help_back"
+                                )
+                            ]
+                        ]
+                    ),
+                )
+
+            elif args[0].lower().startswith("stngs_"):
+                match = re.match("stngs_(.*)", args[0].lower())
+                chat = dispatcher.bot.getChat(match.group(1))
+
+                if is_user_admin(chat, update.effective_user.id):
+                    send_settings(match.group(1), update.effective_user.id, False)
+                else:
+                    send_settings(match.group(1), update.effective_user.id, True)
+
+            elif args[0][1:].isdigit() and "rules" in IMPORTED:
+                IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
+
+        else:
+            first_name = update.effective_user.first_name
+            update.effective_message.reply_text(
+                PM_HENTAI_TEXT.format(
+                    escape_markdown(context.bot.first_name),
+                    escape_markdown(first_name),
+                    escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats(),
+                ),
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,
+                timeout=60,
+            )
 
 
 def error_handler(update, context):
@@ -834,6 +908,8 @@ def main():
 
     test_handler = DisableAbleCommandHandler("test", test, run_async=True)
     start_handler = DisableAbleCommandHandler("start", start, run_async=True)
+    hstart_handler = DisableAbleCommandHandler("hstart", hstart, run_async=True)
+
 
     help_handler = DisableAbleCommandHandler("help", get_help, run_async=True)
     help_callback_handler = CallbackQueryHandler(
@@ -855,6 +931,7 @@ def main():
 
     # dispatcher.add_handler(test_handler)
     dispatcher.add_handler(start_handler)
+    dispatcher.add_handler(hstart_handler) 
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(data_callback_handler)
     dispatcher.add_handler(settings_handler)
