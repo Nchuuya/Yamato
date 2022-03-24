@@ -126,6 +126,7 @@ if ENV:
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     HELP_IMG = os.environ.get("HELP_IMG", True)
     GROUP_START_IMG = os.environ.get("GROUP_START_IMG", True)
+    HENTAI_START_IMG = os.environ.get("HENTAI_START_IMG", True)
     SHASA_PHOTO = os.environ.get("SHASA_PHOTO", True)
 
     try:
