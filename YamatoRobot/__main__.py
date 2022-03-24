@@ -135,8 +135,8 @@ buttons = [
         )
     ],
     [
-        InlineKeyboardButton(text="NEW UPDATES✨", url="https://t.me/boa_updates"),
-        InlineKeyboardButton(text="Kazutora Hanemiya", url="t.me/YamatoXRoBot?start=lstart"),
+        InlineKeyboardButton(text="ʜᴇɴᴛᴀɪ sᴛᴀʀᴛ", url="t.me/YamatoXRoBot?start=hstart"),
+        InlineKeyboardButton(text="Check if I m alive! XD ", url="t.me/YamatoXRoBot?start=halive"),
     ],
     [
         InlineKeyboardButton(text="ᴋᴀᴢᴜᴛᴏʀᴀ ʜᴀɴᴇᴍɪʏᴀ", url="https://t.me/zerohisoka"),
