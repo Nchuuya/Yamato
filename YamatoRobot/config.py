@@ -14,17 +14,17 @@ class Config(object):
     # REQUIRED
     # Login to https://my.telegram.org and fill in these slots with the details given by it
 
-    API_ID = 123456  # integer value, dont use ""
-    API_HASH = "awoo"
-    TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
-    OWNER_ID = 1415798813  # If you dont know, run the bot and do /id in your private chat with it, also an integer
-    OWNER_USERNAME = "MdNoor"
-    SUPPORT_CHAT = "MissShasa_Gbot"  # Your own group for support, do not add the @
+    API_ID = 8276637  # integer value, dont use ""
+    API_HASH = "c412d38a4ebcc2b32621a5c2be276d13"
+    TOKEN = "5246525098:AAHdJfZiC7Rhax0uELU_5IHDX_mlvOB2SXQ"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
+    OWNER_ID = 2034641799  # If you dont know, run the bot and do /id in your private chat with it, also an integer
+    OWNER_USERNAME = "zerohisoka"
+    SUPPORT_CHAT = "BoaHancock_Support"  # Your own group for support, do not add the @
     JOIN_LOGGER = (
-        -1001236063876
+        -1001725899942
     )  # Prints any new group the bot is added to, prints just the name and ID.
     EVENT_LOGS = (
-        -1001188058807
+        -1001725899942
     )  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
 
     # RECOMMENDED
@@ -34,7 +34,7 @@ class Config(object):
     WEBHOOK = False
     INFOPIC = True
     URL = None
-    SPAMWATCH_API = ""  # go to support.spamwat.ch to get key
+    SPAMWATCH_API = "D4_c3kfPnSAnnBECrZbRe1PQlzyTZ3AbxQFfBT~bh6UVZdrhGVOnQK8lye4lNJGL"  # go to support.spamwat.ch to get key
     SPAMWATCH_SUPPORT_CHAT = "@SpamWatchSupport"
 
     # OPTIONAL
