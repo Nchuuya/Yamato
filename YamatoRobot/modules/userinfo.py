@@ -254,7 +254,7 @@ def info(update: Update, context: CallbackContext):
         return
 
     rep = message.reply_text(
-        "<code>Getting Information...</code>", parse_mode=ParseMode.HTML
+        "<code>Yamatte Kudasai mattee mattee...</code>", parse_mode=ParseMode.HTML
     )
 
     text = (
@@ -299,7 +299,7 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThe Disaster level of this person is 'My Hisband'."
+        text += "\n\nThe Disaster level of this person is 'My Husband'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
         text += "\n\nThis user is My 'Sex Partner'."
