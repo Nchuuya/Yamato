@@ -23,7 +23,7 @@ def sigma(update: Update, context: CallbackContext):
 def cosplay(update: Update, context: CallbackContext):
     update.effective_message.reply_photo(random.choice(truth_and_dare_string.COSPLAY))
 
-def waifu(update: Update, context: CallbackContext):
+def onepiece(update: Update, context: CallbackContext):
     update.effective_message.reply_photo(random.choice(truth_and_dare_string.WAIFU))
 
 def yamato(update: Update, context: CallbackContext):
