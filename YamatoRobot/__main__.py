@@ -140,8 +140,6 @@ buttons = [
     [
         InlineKeyboardButton(text="ɴᴇᴡ ᴜᴘᴅᴀᴛᴇꜱ ✨", url="https://t.me/boa_updates/107"),
         InlineKeyboardButton(text="HELP! ", callback_data="help_back"),
-        InlineKeyboardButton(text="Anime Alliance!📺 ", url="https://t.me/straydogs"),
-        InlineKeyboardButton(text="Owner! ", url="https://t.me/zero_hisoka"),
         
         
     ],
