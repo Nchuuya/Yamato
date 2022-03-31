@@ -146,6 +146,15 @@ buttons = [
         
     ],
     [
+        InlineKeyboardButton(text="Anime Alliance!📺 ", url="https://t.me/straydogs"),
+        InlineKeyboardButton(text="Owner! ", url="https://t.me/zero_hisoka"),
+    ],
+        
+
+
+
+
+    [
         InlineKeyboardButton(text="ɴᴇᴛᴡᴏʀᴋ", url="https://t.me/Bonten_community"),
     ],
 ]
