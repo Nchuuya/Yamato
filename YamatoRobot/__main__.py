@@ -142,7 +142,7 @@ buttons = [
         InlineKeyboardButton(text="HELP! ", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="ᴀᴏɢɪʀɪ ɴᴇᴛᴡᴏʀᴋ", url="https://telegram.dog/AogiriNetwork"),
+        InlineKeyboardButton(text="ɴᴇᴛᴡᴏʀᴋ", url="https://t.me/Bonten_community"),
     ],
 ]
 
