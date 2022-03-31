@@ -299,8 +299,8 @@ def start(update: Update, context: CallbackContext):
                     ],
                     [
                         InlineKeyboardButton(
-                            text="ᴀᴏɢɪʀɪ ɴᴇᴛᴡᴏʀᴋ",
-                            url="https://telegram.dog/AogiriNetwork",
+                            text="ɴᴇᴛᴡᴏʀᴋ",
+                            url="https://t.me/Bonten_community",
                         )
                     ],
                 ]
