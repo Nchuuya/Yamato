@@ -97,3 +97,7 @@ heroku3
 jikanpy
 flag
 tracemoepy
+hentai --only-binary all
+natsort
+html-telegraph-poster
+NHentai-API
